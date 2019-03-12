@@ -8,10 +8,10 @@ export default class Loading extends Component {
     try {
       const firstRun = await AsyncStorage.getItem('RUN')
       if (firstRun !== null) {
-        navigation.navigate('Introduce')
+        navigation.navigate('Lists')
 
       } else {
-        navigation.navigate('Introduce')
+        navigation.navigate('Lists')
       }
     } catch (error) {
       Alert.alert(` Async Storage Error : ${error}  `)
@@ -28,7 +28,7 @@ export default class Loading extends Component {
         <View style={styles.wrapper} >
 
           <View style={styles.introTextWrapper}>
-            <Text style={styles.introText} >i remember it!</Text>
+            <Text style={styles.introText} >Yaadame!</Text>
           </View>
           <View style={styles.loadingCircle}>
             <ActivityIndicator size={'large'} color={"#fff"} animating={true} />

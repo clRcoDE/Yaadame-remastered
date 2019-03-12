@@ -14,7 +14,7 @@ import Introduce from  '../pages/Introduce'
 
 const ListsStack = createStackNavigator(
     {
-        ListsScreen:Lists,
+        Lists:Lists,
         Items:Items
     },
     {
@@ -29,16 +29,15 @@ const HomeDrawerStack = createDrawerNavigator(
     {
         About:About,
         Settings:Settings,
-        ListsRoute:ListsStack
+        ListsPath:ListsStack
     },{
-        initialRouteName:'ListsRoute',
-        drawerPosition:'right'
+        initialRouteName:'ListsPath',
     }
 )
 
 
 
-const  AuthSwitch = createSwitchNavigator(
+const  AuthStack = createSwitchNavigator(
     {
         Introduce:Introduce,
         Home:HomeDrawerStack
@@ -49,7 +48,7 @@ const  AuthSwitch = createSwitchNavigator(
 const AppSwitchNavigator = createSwitchNavigator(
     {
         LoadingPage:Loading,
-        Auth:AuthSwitch
+        Auth:AuthStack
     }
 
 )
