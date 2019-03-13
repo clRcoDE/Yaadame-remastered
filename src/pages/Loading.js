@@ -5,21 +5,22 @@ export default class Loading extends Component {
 
   goto = async () => {
     const { navigation } = this.props
-    try {
-      const firstRun = await AsyncStorage.getItem('RUN')
-      if (firstRun !== null) {
-        navigation.navigate('Lists')
+    // try {
+      // const firstRun = await AsyncStorage.getItem('RUN')
+      // if (firstRun !== null) {
+        // navigation.navigate('Home')
 
-      } else {
-        navigation.navigate('Lists')
-      }
-    } catch (error) {
-      Alert.alert(` Async Storage Error : ${error}  `)
-    }
+      // } else {
+        navigation.navigate('Introduce')
+      // }
+    // } catch (error) {
+    //   Alert.alert(` Async Storage Error : ${error}  `)
+    // }
 
   }
   componentDidMount() {
-    setTimeout(() => this.goto() , 2000 )
+    // setTimeout(() => this.goto() , 1000 )
+    this.props.navigation.navigate('Introduce')
   }
 
   render() {
@@ -43,7 +44,7 @@ const styles = StyleSheet.create({
 
   container: {
     flex: 1,
-    backgroundColor: 'grey'
+    backgroundColor: '#444'
   },
   wrapper: {
     flex: 1,
