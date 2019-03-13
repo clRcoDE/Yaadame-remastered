@@ -57,18 +57,20 @@ const getUserFailure = () => {
     }
 }
 
-export const createUser = (user) =>{
+export const createUser = (username) =>{
 
 
     return dispatch => {
         dispatch(createUserBegins())
-        fetch(`http://10.0.2.2/users`,{
+        fetch(`http://10.0.2.2:3000/users`,{
             method:'POST',
-            headers:{},
-            body:user
+            headers:{"Content-Type": "application/json"},
+            body:JSON.stringify({
+                id:`${username}`
+              })
         })
         .then(response =>{if(response.ok){return response.json()}})
-        .then(result => dispatch(createUserSuccess()))
+        .then(result => dispatch(createUserSuccess(result)))
         .catch(dispatch(createUserFailure()))
 
     }
@@ -79,7 +81,7 @@ export const  getUser = (id) =>{
     return dispatch => {
         dispatch(getUserBegin())
         fetch(`http://10.0.2.2/users/${id}`)
-        .then(response =>{if(response.ok){return response.json()}})
+        .then(response =>{if(response.ok && response.json() !== null ){return response.json()}else{getUserFailure()}})
         .then(result => dispatch(getUserSuccess()))
         .catch(dispatch(getUserFailure()))
 
