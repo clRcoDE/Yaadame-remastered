@@ -1,7 +1,18 @@
 import React, { Component , PureComponent} from 'react'
-import { Text, StyleSheet, View , FlatList , Dimensions ,Platform , TouchableOpacity , Animated} from 'react-native'
+import { Text,
+   StyleSheet,
+   View ,
+   FlatList ,
+   Dimensions ,
+  Platform ,
+   TouchableOpacity ,
+   Animated , 
+  TextInput ,
+   KeyboardAvoidingView ,
+   SafeAreaView
+  } from 'react-native'
 
-import {introduce} from '../assets/mockData/introduce'
+import {introduce} from '../assets/mockData/introduceData'
 
 
 const dim = Dimensions.get('window')
@@ -16,7 +27,7 @@ constructor(props){
 
 toNext=(id)=>{
   const {navigation} = this.props
-// if(id === "4"){
+// if(id === "5"){
 navigation.navigate('Home')
 // }
 }
@@ -25,7 +36,7 @@ navigation.navigate('Home')
 
     
     return (
-      <View style={styles.container} >
+      <KeyboardAvoidingView style={styles.container}  enabled >
         <View style={styles.introduceListWrapper}>
         <FlatList 
         data={introduce}
@@ -38,6 +49,7 @@ navigation.navigate('Home')
         <View style={styles.introducePage} >
         <View style={styles.iconWrapper}>{item.icon}</View>
         <View style={styles.textWrapper}><Text style={styles.introduceText} >{item.text}</Text></View>
+        { item.id ==="4" && <View style={styles.inputWrapper}><TextInput placeholder={'your name here'} /></View>}
         <View style={styles.nextWrapper}><TouchableOpacity style={styles.TouchableStyles} onPress={()=>this.toNext(item.id)} ><Text style={styles.buttonText} >{item.button}</Text></TouchableOpacity></View>
         <View style={styles.pagingdotsWrapper}>
         {introduce.map((dots, i)=>{
@@ -56,7 +68,7 @@ navigation.navigate('Home')
         />
         </View>
         
-      </View>
+      </KeyboardAvoidingView>
     )
   }
 }
@@ -87,13 +99,13 @@ const styles = StyleSheet.create({
     // marginHorizontal: 50,
   },
   iconWrapper:{
-    flex:12,
+    flex:8,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth:2
   },
   textWrapper:{
-    flex:6,
+    flex:3,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth:2,
@@ -111,7 +123,7 @@ justifyContent: 'center',
 alignItems: 'center',
   },
   pagingdotsWrapper:{
-flex:1,
+flex:2,
 justifyContent: 'center',
 alignItems: 'center',
 flexDirection: 'row',
@@ -133,5 +145,13 @@ fontWeight:'600'
     borderRadius: 100,
     backgroundColor: "#2556d1"
     
+  },
+  inputWrapper:{
+    flex:3,
+    // backgroundColor:'#333',
+    alignItems: 'center',
+    justifyContent: 'center',
+    // borderWidth:3,
+    // borderColor:'red'
   }
 })
