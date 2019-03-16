@@ -2,13 +2,64 @@
   "users": [
     {
       "id": "james"
+    },
+    {
+      "id": "emily"
+    },
+    {
+      "id": "timmy"
+    },
+    {
+      "id": "eli"
+    },
+    {
+      "id": "martin"
+    },
+    {
+      "id": "henry"
+    },
+    {
+      "id": "alex"
+    },
+    {
+      "id": "leo"
     }
   ],
   "lists": [
     {
       "userId": "james",
-      "title": "kharid",
+      "title": "james shop list",
       "id": 1
+    },
+    {
+      "userId": "james",
+      "title": "james workspace tasks",
+      "id": 2
+    },
+    {
+      "userId": "emily",
+      "title": "emily shop list",
+      "id": 3
+    },
+    {
+      "userId": "timmy",
+      "title": "timmy shop list",
+      "id": 4
+    },
+    {
+      "userId": "alex",
+      "title": "mal mal",
+      "id": 5
+    },
+    {
+      "userId": "leo",
+      "title": "cut",
+      "id": 6
+    },
+    {
+      "userId": "leo",
+      "title": "shop",
+      "id": 7
     }
   ],
   "items": [
@@ -18,7 +69,41 @@
       "title": "buy milk",
       "isCompleted": false,
       "id": 1
+    },
+    {
+      "listId": 1,
+      "userId": "james",
+      "title": "buy suger",
+      "isCompleted": false,
+      "id": 2
+    },
+    {
+      "listId": 2,
+      "userId": "james",
+      "title": "review plans",
+      "isCompleted": false,
+      "id": 3
+    },
+    {
+      "listId": 3,
+      "userId": "emily",
+      "title": "buy gums",
+      "isCompleted": false,
+      "id": 4
+    },
+    {
+      "listId": 4,
+      "userId": "timmy",
+      "title": "buy eggs",
+      "isCompleted": false,
+      "id": 5
+    },
+    {
+      "listId": 4,
+      "userId": "timmy",
+      "title": "buy snakes",
+      "isCompleted": false,
+      "id": 6
     }
-    
   ]
 }

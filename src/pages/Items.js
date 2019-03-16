@@ -1,81 +1,101 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View ,TouchableOpacity , FlatList , TextInput, Keyboard} from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard } from 'react-native'
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
-import {connect} from 'react-redux'
-import {addItem} from '../services/todo//actions'
- class Lists extends Component {
+import { connect } from 'react-redux'
+import { addItem , getExistingItems } from '../services/todo//actions'
+class Items extends Component {
 
 
-   constructor(props){
-     super(props)
-     this.state={
-       isShowButtons:false,
-       textInput:null
-       
-     }
-   }
+  constructor(props) {
+    super(props)
+    this.state = {
+      isShowButtons: false,
+      textInput: null
 
-   static navigationOptions=({navigation})=>{
-     return{
-       title:navigation.getParam('title','null')
-     }
-   }
+    }
 
-   hideButtons=()=>{
-     this.setState({isShowButtons:false})
-   }
-   showButtons=()=>{
-     this.setState({isShowButtons:true})
-   }
-   clearInput=()=>{
-     this.setState({textInput:null})
-   }
-   setName=(text)=>{
-this.setState({textInput:text})
-   }
-   addNewItem=()=>{
-    const  {navigation} = this.props
-     const listId =  navigation.getParam('id',null)
-     const userId = this.props.user.user.id
+  }
 
-Keyboard.dismiss()
-    onSuccess=()=>{
-this.clearInput()
+  static navigationOptions = ({ navigation }) => {
+    return {
+      title: navigation.getParam('title', 'null')
+    }
+  }
+/**************************************************  input functions  ****************************************************/
+  hideButtons = () => {
+    this.setState({ isShowButtons: false })
+  }
+  showButtons = () => {
+    this.setState({ isShowButtons: true })
+  }
+  clearInput = () => {
+    this.setState({ textInput: null })
+  }
+  setItemName = (text) => {
+    this.setState({ textInput: text })
+  }
+
+/******************************************************   add new Item   ****************************************************/
+
+  addNewItem =   () => {
+    const { navigation } = this.props
+    const listId = navigation.getParam('id', null)
+    const userId = this.props.user.user.id
+
+    Keyboard.dismiss()
+    onSuccess = () => {
+      this.clearInput()
     }
     // const listId = navigation.getParam('list')
-this.props.addItem(userId,listId,this.state.textInput,onSuccess)
-   }
-   
-  //  onSuccess()
-  drawer =()=>{
-    const  {navigation} = this.props
-
-
-    
-   navigation.openDrawer()
+    this.props.addItem(userId, listId, this.state.textInput, onSuccess)
+    //  this.data = this.props.todo.lists[this.listIndex].items
   }
-  toggleItem=({title})=>{
-    const  {navigation} = this.props
-// navigation.navigate('Items',{title:title})
+
+  drawer = () => {
+    const { navigation } = this.props
+
+
+
+    navigation.openDrawer()
+  }
+  
+
+  componentDidMount() {
+    this.listId = this.props.navigation.getParam('id', null),
+    this.userId = this.props.navigation.getParam('userId',null)
+    this.props.getExistingItems(this.userId , this.listId )
+
   }
   render() {
     return (
       <View style={styles.container} >
         <View style={styles.headerWrapper}>
-        <TouchableOpacity  style={styles.menuListButton} onPress={this.drawer.bind(this)}>
-        <IonIcons size={50} color={'#eee'} name={'ios-list'}/>
-        </TouchableOpacity>
-        <View style={styles.headerTextWrapper}>
-        <Text style={styles.headerText} >{this.props.navigation.getParam('title','null')}</Text>
-        </View>
+          <TouchableOpacity style={styles.menuListButton} onPress={this.drawer.bind(this)}>
+            <IonIcons size={50} color={'#eee'} name={'ios-list'} />
+          </TouchableOpacity>
+          <View style={styles.headerTextWrapper}>
+            <Text style={styles.headerText} >{this.props.navigation.getParam('title', 'null')}</Text>
+          </View>
         </View>
         <View style={styles.listsWrapper}>
-        {/* <FlatList 
-        data={this.props.lists.lists}
+
+          
+
+          <FlatList
+            ListEmptyComponent={() => <View style={styles.emptyLists} ><Text>empty list</Text></View>}
+            data={ this.props.todo.lists[this.props.listIndex].items }
+            // extraData={this.data}
+            renderItem={({ item }) => (<View style={styles.listStyle}><Text>{item.title}</Text></View>)}
+          />
+
+
+          {/* <FlatList 
+
+        data={this.props.lists.lists[this.listIndex].items}
         keyExtractor={item=>item.title}
-        renderItem={({item})=>(<TouchableOpacity  onPress={(item)=>{this.toggleItem(item)}} style={styles.listElement}>
+        renderItem={({item})=>(<TouchableOpacity  onPress={()=>{this.toggleItem(item)}} style={styles.listElement}>
         
         <View style={styles.elementWrapper}>
         <View style={styles.elementIcon}><EntypoIcon name={"circle"} size={25} color={"#1fe062"}   /></View>
@@ -86,46 +106,46 @@ this.props.addItem(userId,listId,this.state.textInput,onSuccess)
         
         
         /> */}
-        
+
         </View>
         <View style={styles.footerWrapper}>
-        <View style={styles.inputNewList}>
-        <View style={styles.addButtonWrapper}>
-        {this.state.isShowButtons && 
-           <TouchableOpacity 
-           underlayColor={'rgba(33, 86, 158,0.7)'} 
-           style={styles.addButton} 
-           onPress={this.addNewItem.bind(this)} >
-           <Text>اضافه کن</Text>
-           </TouchableOpacity>}
-        </View>
-        {this.state.isShowButtons && 
-        <TouchableOpacity
-         underlayColor={'rgba(255,255,255,0.9)'}
-         onPress={this.clearInput.bind(this)}
-         style={styles.clearButton}>
-        <EvilIcon name={'close'} size={18} color='#222'  />
-        </TouchableOpacity>}
-       
-          <TextInput 
-          underlayColor={'rgba(255,255,255,0.65)'}  
-          value={this.state.textInput} 
-          onChangeText={(text)=>this.setName(text)}  
-          multiline={true} 
-          maxLength={36} 
-          style={styles.inputStyles}
-           onBlur={this.hideButtons.bind(this)}
-           onFocus={this.showButtons.bind(this)}
-          placeholder={'یه کار جدید اضافه کن'} >
-          </TextInput>
-          {this.state.isShowButtons &&
-             <TouchableOpacity   underlayColor={'rgba(150,150,150,0.65)'} onPress={()=>{}} style={styles.colorSelector} >
-          <EntypoIcon name={"circle"} size={25} color={"#1fe062"}   />
-          </TouchableOpacity>}
-        </View>
+          <View style={styles.inputNewList}>
+            <View style={styles.addButtonWrapper}>
+              {this.state.isShowButtons &&
+                <TouchableOpacity
+                  underlayColor={'rgba(33, 86, 158,0.7)'}
+                  style={styles.addButton}
+                  onPress={this.addNewItem.bind(this)} >
+                  <Text>اضافه کن</Text>
+                </TouchableOpacity>}
+            </View>
+            {this.state.isShowButtons &&
+              <TouchableOpacity
+                underlayColor={'rgba(255,255,255,0.9)'}
+                onPress={this.clearInput.bind(this)}
+                style={styles.clearButton}>
+                <EvilIcon name={'close'} size={18} color='#222' />
+              </TouchableOpacity>}
+
+            <TextInput
+              underlayColor={'rgba(255,255,255,0.65)'}
+              value={this.state.textInput}
+              onChangeText={(text) => this.setItemName(text)}
+              multiline={true}
+              maxLength={36}
+              style={styles.inputStyles}
+              onBlur={this.hideButtons.bind(this)}
+              onFocus={this.showButtons.bind(this)}
+              placeholder={'یه کار جدید اضافه کن'} >
+            </TextInput>
+            {this.state.isShowButtons &&
+              <TouchableOpacity underlayColor={'rgba(150,150,150,0.65)'} onPress={() => { }} style={styles.colorSelector} >
+                <EntypoIcon name={"circle"} size={25} color={"#1fe062"} />
+              </TouchableOpacity>}
+          </View>
         </View>
 
-        
+
       </View>
     )
   }
@@ -133,52 +153,69 @@ this.props.addItem(userId,listId,this.state.textInput,onSuccess)
 
 
 const styles = StyleSheet.create({
-  container:{
-    flex:1,
+  container: {
+    flex: 1,
     justifyContent: 'center',
   },
-  headerWrapper:{
+  headerWrapper: {
     // flex:5,
-    height:150,
-    backgroundColor:'blue',
-    
+    height: 150,
+    backgroundColor: '#333',
+
     justifyContent: 'flex-end',
-    alignItems:'flex-start',
+    alignItems: 'flex-start',
   },
-  listsWrapper:{
-    flex:8,
-    backgroundColor:'red'
+  listsWrapper: {
+    flex: 8,
+    backgroundColor: '#eee'
 
   },
-  footerWrapper:{
+  emptyLists: {
+    height: 300,
+    borderWidth: 10,
+    borderRadius: 12,
+    borderColor: '#999',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  listStyle: {
+    height:50,
+    marginVertical: 10,
+    borderWidth:1,
+    borderRadius: 8,
+    borderColor: '#333',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  footerWrapper: {
     // flex:2,
-    backgroundColor:'green'
+    backgroundColor: 'green'
   },
-  menuListButton:{
+  menuListButton: {
     position: 'absolute',
-    top:0,
-    left:0,
-    marginLeft:20,
-    marginTop:15
+    top: 0,
+    left: 0,
+    marginLeft: 20,
+    marginTop: 15
   },
-  headerTextWrapper:{
+  headerTextWrapper: {
     // borderWidth:3,
     borderColor: '#fff',
-    marginLeft:20,
+    marginLeft: 20,
   },
-  headerText:{
-    fontSize:35,
-    color:'#eee',
+  headerText: {
+    fontSize: 35,
+    color: '#eee',
     fontWeight: '600',
   },
   inputStyles: {
     // textAlign: 'center',
-    flex:1,
-    fontSize:20,
+    flex: 1,
+    fontSize: 20,
     // borderWidth:2,
     // borderColor:'gold',
-    padding:16,
-    marginBottom:2
+    padding: 16,
+    marginBottom: 2
   },
   inputNewList: {
     backgroundColor: '#fff',
@@ -188,51 +225,52 @@ const styles = StyleSheet.create({
     // paddingRight:25,
     position: "relative",
     zIndex: 2,
-    borderWidth:1,
-    borderRadius:3,
-    borderColor:'#666',
+    borderWidth: 1,
+    borderRadius: 3,
+    borderColor: '#666',
     // flexWrap:"wrap-reverse",
     flexDirection: 'row',
   },
-  addButtonWrapper:{
-marginBottom:12,
-margin:6
+  addButtonWrapper: {
+    marginBottom: 12,
+    margin: 6
   },
-  addButton:{
-backgroundColor:'#2172e0',
-borderRadius: 3,
-padding:8
+  addButton: {
+    backgroundColor: '#2172e0',
+    borderRadius: 3,
+    padding: 8
   },
-  
-  clearButton:{
-   marginBottom:22,
-   marginRight:6
-  },
-  colorSelector:{
-    marginBottom:15,
-    marginHorizontal:6,
-    borderRadius:100
-  },
-  listElement:{
 
-    height:50,
+  clearButton: {
+    marginBottom: 22,
+    marginRight: 6
+  },
+  colorSelector: {
+    marginBottom: 15,
+    marginHorizontal: 6,
+    borderRadius: 100
+  },
+  listElement: {
+
+    height: 50,
     borderBottomWidth: 1,
     justifyContent: 'center',
 
 
   },
 
-  elementWrapper:{
+  elementWrapper: {
     flexDirection: 'row',
-    flex:1,
+    flex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
   }
 })
 const mapStateToProps = (state) => {
   return {
- lists:state.todoReducer,
- user:state.userReducer
+    todo: state.todoReducer,
+    user: state.userReducer,
+    listIndex:state.todoReducer.listIndex
   }
 }
-export default connect(mapStateToProps,{addItem})(Lists)
+export default connect(mapStateToProps, { addItem , getExistingItems })(Items)

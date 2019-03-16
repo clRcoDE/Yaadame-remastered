@@ -34,10 +34,14 @@ const getListsBegins = () => {
     }
 }
 
-const getListsSuccess = (lists) => {
+const getListsSuccess = (items,listId) => {
     return {
         type:GET_USER_EXISTING_LISTS_SUCCEED,
-        lists
+        payload:{
+
+            listId,
+            items
+        }
     }
 }
 
@@ -57,7 +61,10 @@ const addListBegins = () => {
 const addListSuccess = (newList) => {
     return {
         type:ADD_LIST_SUCCEED,
-        newList,
+        payload:{
+            newList,
+        }
+        
         
     }
 }
@@ -97,9 +104,14 @@ const getItemsBegins = () => {
 }
 
 
-const  getItemsSuccess = () => {
+const  getItemsSuccess = (Items,listId) => {
     return {
-        type:GET_LIST_EXISTING_ITEMS_SUCCEED
+        type:GET_LIST_EXISTING_ITEMS_SUCCEED,
+        payload:{
+            Items,
+            listId
+        }
+        
     }
 }
 
@@ -120,8 +132,11 @@ const addItemBegins = () => {
 const  addItemSuccess = (newItem,listId) => {
     return {
         type:ADD_ITEM_SUCCEED,
-        newItem,
-        listId
+        payload:{
+
+            newItem,
+            listId
+        }
     }
 }
 
@@ -192,7 +207,7 @@ export const getExistingLists =(userId) =>{
 }
 
 
-export const addList =(userId,listname,onSuccess) =>{
+export const addList =(userId,listName,onSuccess) =>{
     return dispatch =>{
         dispatch(addListBegins())
         fetch(`http://10.0.2.2:3000/users/${userId}/lists`,{
@@ -201,7 +216,7 @@ export const addList =(userId,listname,onSuccess) =>{
             body:JSON.stringify({
                 
                     userId:userId,
-                    title:listname,
+                    title:listName,
                     
                   
               })
@@ -220,9 +235,14 @@ export const deleteList =() =>{
 }
 
 
-export const getExistingItems = () =>{
-    return dispatch => {
-
+export const getExistingItems = (userId , listId  ) =>{
+    return dispatch =>{
+        dispatch(getListsBegins())
+        fetch(`http://10.0.2.2:3000/lists/${listId}/items?userId=${userId}`)
+        
+        .then(response =>{if(response.ok){return response.json()}})
+        .then((result) => dispatch(getItemsSuccess(result, listId)))
+        .catch(dispatch(getItemsFailure()))
     }
 }
 
@@ -230,7 +250,7 @@ export const getExistingItems = () =>{
 export const addItem = (userId , listId , newItem , onSuccess) => {
     return dispatch => {
         dispatch(addListBegins())
-        fetch(`http://10.0.2.2:3000/lists/${listId}/items`,{
+        fetch(`http://10.0.2.2:3000/lists/${listId}/items?userId=${userId}`,{
             method:'POST',
             headers:{"Content-Type": "application/json"},
             body:JSON.stringify({

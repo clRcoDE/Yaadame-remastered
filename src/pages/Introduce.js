@@ -159,7 +159,8 @@ const styles = StyleSheet.create({
   introduceText: {
     fontWeight: '600',
     fontFamily: Platform.OS === 'ios' ? 'San Fransico' : 'Roboto',
-    textAlign: 'center'
+    textAlign: 'center',
+    fontSize:20
   },
   nextWrapper: {
     flex: 2,
