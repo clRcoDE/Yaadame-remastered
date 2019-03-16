@@ -25,34 +25,51 @@ class Introduce extends PureComponent {
   constructor(props) {
     super(props);
     this.state = {
-      textInput: '',
+      textInput: null,
       scrollX: new Animated.Value(0),
-      IntScrollX:0
-      
+      IntScrollX: 0
+
     }
   }
+
+
+
   setText = (text) => {
     this.setState({ textInput: text })
   }
-  toNext = (id ,i) => {
+
+
+
+  toNext = (id, i) => {
     let numId = parseInt(id)
     const { navigation } = this.props
-if(numId===4){
-this.props.createUser(this.state.textInput)
-}
-if(i < 5 ){
-this.flatlist.scrollToIndex({index:i+1})
-}else{
-  navigation.navigate('Home')
-}
-    // if(id === "5"){
-    //
-    // }
+
+
+    if (numId === 4) {
+
+
+      onSuccess =()=>{
+        navigation.navigate('Home')
+      }
+      this.props.createUser(this.state.textInput, onSuccess)
+      
+
+    }
+    else {
+
+      this.flatlist.scrollToIndex({ index: i + 1 })
+
+    }
+
   }
+  
+
+
+
   render() {
     let position = Animated.divide(this.state.scrollX, dim.width * (80 / 100));
 
-let IntPosition = Math.round(this.state.IntScrollX / dim.width*1.25)
+    let IntPosition = Math.round(this.state.IntScrollX / dim.width * 1.25)
 
 
     return (
@@ -63,19 +80,19 @@ let IntPosition = Math.round(this.state.IntScrollX / dim.width*1.25)
             keyExtractor={(item) => item.id}
             horizontal={true}
             pagingEnabled={true}
-            ref={ref=> this.flatlist = ref}
-            onScroll={({ nativeEvent }) => { this.setState({ scrollX: nativeEvent.contentOffset.x , IntScrollX : nativeEvent.contentOffset.x }) }}
+            ref={ref => this.flatlist = ref}
+            onScroll={({ nativeEvent }) => { this.setState({ scrollX: nativeEvent.contentOffset.x, IntScrollX: nativeEvent.contentOffset.x }) }}
             showsHorizontalScrollIndicator={false}
-            renderItem={({ item , index}) => (
+            renderItem={({ item, index }) => (
               <View style={styles.introducePage} >
                 <View style={styles.iconWrapper}>{item.icon}</View>
                 <View style={styles.textWrapper}><Text style={styles.introduceText} >{item.text}</Text></View>
                 {item.id === "4" &&
                   <View style={styles.inputWrapper}>
-                    <TextInput onChangeText={text => this.setText(text)} placeholder={'your name here'} />
+                    <TextInput onChangeText={text => this.setText(text)} placeholder={'your name here'}  />
                   </View>}
                 <View style={styles.nextWrapper}>
-                  <TouchableOpacity style={styles.TouchableStyles} onPress={() => { this.toNext(item.id, IntPosition )}} >
+                  <TouchableOpacity style={styles.TouchableStyles} onPress={() => { this.toNext(item.id, IntPosition) }} >
                     <Text style={styles.buttonText} >{item.button}</Text>
                   </TouchableOpacity>
                 </View>

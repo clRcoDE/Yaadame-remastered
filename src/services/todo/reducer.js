@@ -33,20 +33,21 @@ export default todo = (state = initialState, action) => {
         case ADD_LIST_BEGINS:
             return {
                 ...state,
-                loading: true
             }
         case ADD_LIST_SUCCEED:
             return {
-                loading: false,
+                ...state,
                 lists: [
                     ...state.lists,
-                    action.newList
+                    {
+                        ...action.newList,
+                         items:[]
+                        }
                 ]
             }
         case ADD_LIST_FAILED:
             return {
                 ...state,
-                loading: false,
 
             }
 
@@ -54,20 +55,17 @@ export default todo = (state = initialState, action) => {
             case GET_USER_EXISTING_LISTS_BEGINS:
             return{
                 ...state,
-                loading:true
             }
 
 
             case GET_USER_EXISTING_LISTS_SUCCEED:
 
             return{
-                loading:false,
                 lists:action.existingLists
             }
             case GET_USER_EXISTING_LISTS_FAILED:
             return {
                 ...state,
-                loading : false,
             }
 
 
@@ -75,12 +73,10 @@ export default todo = (state = initialState, action) => {
         case DELETE_LIST_BEGINS:
             return {
                 ...state,
-                loading: true
             }
         case DELETE_LIST_SUCCEED:
             const indexDel1 = state.lists.findIndex(({ id }) => id === action.listId)
             return {
-                loading: false,
                 lists: [
                     ...state.lists.slice(0, indexDel1),
                     ...state.lists.slice(indexDel1 + 1)
@@ -90,7 +86,6 @@ export default todo = (state = initialState, action) => {
         case DELETE_LIST_FAILED:
             return {
                 ...state,
-                loading: false
             }
         case ADD_ITEM_BEGINS:
             const indexAdd1 = state.lists.findIndex(({ id }) => id === action.listId)
@@ -101,19 +96,18 @@ export default todo = (state = initialState, action) => {
                     ...state.lists.slice(0, indexAdd1),
                     {
                         ...state.lists[indexAdd1],
-                        loading: true
                     },
                     ...state.lists.slice(indexAdd1 + 1)
                 ]
             }
         case ADD_ITEM_SUCCEED:
-            const indexAdd2 = state.lists.findIndex(({ id }) => id === action.listId)
+            const indexAdd2 = state.lists.findIndex((item) =>{ if(item.id == action.listId){return item}} )
             return {
                 ...state,
                 lists: [
                     ...state.lists.slice(0, indexAdd2),
                     {
-                        loading: false,
+                        ...state.lists[indexAdd2],
                         items: [
                             ...state.lists[indexAdd2].items,
                             action.newItem
@@ -131,7 +125,6 @@ export default todo = (state = initialState, action) => {
                     ...state.lists.slice(0, indexAdd3),
                     {
                         ...state.lists[indexAdd3],
-                        loading: false
                     },
                     ...state.lists.slice(indexAdd3 + 1)
                 ]
@@ -151,7 +144,6 @@ export default todo = (state = initialState, action) => {
                         ...state.lists[listIndexTog1].items.slice(0, itemIndexTog1),
                         {
                             ...state.lists[listIndexTog1].items[itemIndexTog1],
-                            loading:true
                         },
                         ...state.lists[listIndexTog1].items.slice(itemIndexTog1 + 1)
                     ]
@@ -199,7 +191,6 @@ export default todo = (state = initialState, action) => {
                         ...state.lists[listIndexTog3].items.slice(0, itemIndexTog3),
                         {
                             ...state.lists[listIndexTog3].items[itemIndexTog3],
-                            loading:false
                         },
                         ...state.lists[listIndexTog3].items.slice(itemIndexTog3 + 1)
                     ]
@@ -224,7 +215,6 @@ export default todo = (state = initialState, action) => {
                         ...state.lists[listIndexDel1].items.slice(0, itemIndexDel1),
                         {
                             ...state.lists[listIndexDel1].items[itemIndexDel1],
-                            loading:true
                         },
                         ...state.lists[listIndexDel1].items.slice(itemIndexDel1 + 1)
                     ]
@@ -266,7 +256,6 @@ export default todo = (state = initialState, action) => {
                         ...state.lists[listIndexDel3].items.slice(0, itemIndexDel3),
                         {
                             ...state.lists[listIndexDel3].items[itemIndexDel3],
-                            loading:false
                         },
                         ...state.lists[listIndexDel3].items.slice(itemIndexDel3 + 1)
                     ]

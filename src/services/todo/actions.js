@@ -34,9 +34,10 @@ const getListsBegins = () => {
     }
 }
 
-const getListsSuccess = () => {
+const getListsSuccess = (lists) => {
     return {
-        type:GET_USER_EXISTING_LISTS_SUCCEED
+        type:GET_USER_EXISTING_LISTS_SUCCEED,
+        lists
     }
 }
 
@@ -53,9 +54,11 @@ const addListBegins = () => {
 }
 
 
-const addListSuccess = () => {
+const addListSuccess = (newList) => {
     return {
-        type:ADD_LIST_SUCCEED
+        type:ADD_LIST_SUCCEED,
+        newList,
+        
     }
 }
 
@@ -114,9 +117,11 @@ const addItemBegins = () => {
 }
 
 
-const  addItemSuccess = () => {
+const  addItemSuccess = (newItem,listId) => {
     return {
-        type:ADD_ITEM_SUCCEED
+        type:ADD_ITEM_SUCCEED,
+        newItem,
+        listId
     }
 }
 
@@ -175,15 +180,35 @@ const  deleteItemFailure = () => {
 
 
 
-export const getExistingLists =() =>{
+export const getExistingLists =(userId) =>{
     return dispatch =>{
-
+        dispatch(getListsBegins())
+        fetch(`http://10.0.2.2:3000/users/${userId}/lists`)
+        
+        .then(response =>{if(response.ok){return response.json()}})
+        .then((result) => dispatch(getListsSuccess(result)))
+        .catch(dispatch(getListsFailure()))
     }
 }
 
 
-export const addList =() =>{
+export const addList =(userId,listname,onSuccess) =>{
     return dispatch =>{
+        dispatch(addListBegins())
+        fetch(`http://10.0.2.2:3000/users/${userId}/lists`,{
+            method:'POST',
+            headers:{"Content-Type": "application/json"},
+            body:JSON.stringify({
+                
+                    userId:userId,
+                    title:listname,
+                    
+                  
+              })
+        })
+        .then(response =>{if(response.ok){return response.json()}})
+        .then((result) => {dispatch(addListSuccess(result)); onSuccess()})
+        .catch(dispatch(addListFailure()))
 
     }
 }
@@ -202,9 +227,24 @@ export const getExistingItems = () =>{
 }
 
 
-export const addItem = () => {
+export const addItem = (userId , listId , newItem , onSuccess) => {
     return dispatch => {
-
+        dispatch(addListBegins())
+        fetch(`http://10.0.2.2:3000/lists/${listId}/items`,{
+            method:'POST',
+            headers:{"Content-Type": "application/json"},
+            body:JSON.stringify({
+                
+                userId:userId,
+                    listId:listId,
+                    title:newItem,
+                    isCompleted:false
+                  
+              })
+        })
+        .then(response =>{if(response.ok){return response.json()}})
+        .then((result) => {dispatch(addItemSuccess(result,listId)); onSuccess()})
+        .catch(dispatch(addItemFailure()))
     }
 }
 

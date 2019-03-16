@@ -57,7 +57,7 @@ const getUserFailure = () => {
     }
 }
 
-export const createUser = (username) =>{
+export const createUser = (username, onSuccess) =>{
 
 
     return dispatch => {
@@ -70,7 +70,7 @@ export const createUser = (username) =>{
               })
         })
         .then(response =>{if(response.ok){return response.json()}})
-        .then(result => dispatch(createUserSuccess(result)))
+        .then((result) => {dispatch(createUserSuccess(result)); onSuccess() })
         .catch(dispatch(createUserFailure()))
 
     }

@@ -29,18 +29,8 @@ export const introduce = [
         id:"3"
     },{
             icon:<AntIcon color={'#4286f4'} size={150} name={'arrowdown'}/>,
-            text:"First Enter Your Name",
+            text:"First Enter Your username",
             button:"I'm Done ",
             id:"4"
-    },{
-        icon:<AntIcon color={'#4286f4'} size={150} name={'exclamationcircleo'} />,
-        text:"Let's Dive Into Yaadame !",
-        button:"start",
-        id:"5"
-    },{
-        icon:<EntypoIcon  color={'#4286f4'} size={150} name={'emoji-flirt'} />,
-        text:"Welcome back",
-        button:"start",
-        id:"6"
-    }
+    },
 ]

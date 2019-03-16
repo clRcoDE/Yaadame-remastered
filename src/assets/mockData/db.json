@@ -1,36 +1,24 @@
 {
   "users": [
     {
-      "id": "ali"
-    },
-    {
-      "id": "kK1-qdQ"
-    },
-    {
-      "id": "ffffff"
-    },
-    {
-      "id": "ee2e2"
-    },
-    {
-      "id": "dnn"
-    },
-    {
-      "id": "asadasd"
-    },
-    {
-      "id": "dddd"
-    },
-    {
-      "id": "8NqZsQS"
-    },
-    {
-      "id": "dfvFI69"
-    },
-    {
-      "id": "Tk4AzWa"
+      "id": "james"
     }
   ],
-  "lists": [],
-  "items": []
+  "lists": [
+    {
+      "userId": "james",
+      "title": "kharid",
+      "id": 1
+    }
+  ],
+  "items": [
+    {
+      "listId": 1,
+      "userId": "james",
+      "title": "buy milk",
+      "isCompleted": false,
+      "id": 1
+    }
+    
+  ]
 }

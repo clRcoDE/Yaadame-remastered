@@ -15,7 +15,7 @@ import Introduce from  '../pages/Introduce'
 const ListsStack = createStackNavigator(
     {
         Lists:Lists,
-        Items:Items
+        ItemScreen:Items
     },
     {
         mode:'modal',
@@ -41,6 +41,8 @@ const  AuthStack = createSwitchNavigator(
     {
         Introduce:Introduce,
         Home:HomeDrawerStack
+    },{
+        initialRouteName:'Home'
     }
 )
 
