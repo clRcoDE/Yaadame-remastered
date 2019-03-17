@@ -89,6 +89,7 @@ class Lists extends Component {
         </View>
         <View style={styles.listsWrapper}>
           <FlatList
+          ListEmptyComponent={()=>(<View style={styles.emptyComponent} ><Text>add list there</Text></View>)}
             data={this.props.listsReducer.lists}
             keyExtractor={item => item.title}
             renderItem={({ item }) => (
@@ -247,6 +248,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
 
 
+  },
+  emptyComponent:{
+
+
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor:'#333',
+    borderWidth:3,
+    borderRadius:20,
+    margin:20,
+    height:300
   },
 
   elementWrapper: {

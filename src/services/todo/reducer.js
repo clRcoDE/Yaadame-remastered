@@ -24,9 +24,8 @@ import {
      } from './types'
 
 const initialState = {
-    loading: false,
-    lists: [],
-    listIndex:0
+    
+    lists: []
 }
 
 export default todo = (state = initialState, action) => {
@@ -117,13 +116,14 @@ export default todo = (state = initialState, action) => {
 
 
         case ADD_ITEM_SUCCEED:
-            const indexAdd2 = state.lists.findIndex(({ id }) => id == action.payload.listId)
+            const indexAdd2 = state.lists.findIndex(({ id }) => id == action.payload.newItem.listId)
             return {
                 ...state,
-                listIndex:indexAdd2,
+                
                 lists: [
                     ...state.lists.slice(0, indexAdd2),
                     {
+                        ...state.lists[indexAdd2],
                         
                         items: [
                             ...state.lists[indexAdd2].items,

@@ -15,6 +15,8 @@ class Items extends Component {
       textInput: null
 
     }
+    this.listId = this.props.navigation.getParam('listId', null)
+    this.listIndex = this.props.todo.lists.findIndex(({id})=> id == this.listId)
 
   }
 
@@ -41,16 +43,14 @@ class Items extends Component {
 
   addNewItem =   () => {
     const { navigation } = this.props
-    const listId = navigation.getParam('id', null)
     const userId = this.props.user.user.id
 
     Keyboard.dismiss()
     onSuccess = () => {
       this.clearInput()
     }
-    // const listId = navigation.getParam('list')
-    this.props.addItem(userId, listId, this.state.textInput, onSuccess)
-    //  this.data = this.props.todo.lists[this.listIndex].items
+    this.props.addItem(userId, this.listId, this.state.textInput, onSuccess)
+    
   }
 
   drawer = () => {
@@ -63,9 +63,14 @@ class Items extends Component {
   
 
   componentDidMount() {
-    this.listId = this.props.navigation.getParam('id', null),
-    this.userId = this.props.navigation.getParam('userId',null)
-    this.props.getExistingItems(this.userId , this.listId )
+    
+
+
+  //  this.data =  this.props.todo.lists[this.listIndex].items
+
+
+
+    // this.props.getExistingItems(this.userId , this.listId )
 
   }
   render() {
@@ -85,27 +90,13 @@ class Items extends Component {
 
           <FlatList
             ListEmptyComponent={() => <View style={styles.emptyLists} ><Text>empty list</Text></View>}
-            data={ this.props.todo.lists[this.props.listIndex].items }
-            // extraData={this.data}
+            data={ this.props.todo.lists[this.listIndex].items}
+           
             renderItem={({ item }) => (<View style={styles.listStyle}><Text>{item.title}</Text></View>)}
           />
 
 
-          {/* <FlatList 
-
-        data={this.props.lists.lists[this.listIndex].items}
-        keyExtractor={item=>item.title}
-        renderItem={({item})=>(<TouchableOpacity  onPress={()=>{this.toggleItem(item)}} style={styles.listElement}>
-        
-        <View style={styles.elementWrapper}>
-        <View style={styles.elementIcon}><EntypoIcon name={"circle"} size={25} color={"#1fe062"}   /></View>
-        <View style={styles.elementText}><Text>{item.title}</Text></View>
-        <View style={styles.elementDetails}></View>
-        </View>
-        </TouchableOpacity  >)}
-        
-        
-        /> */}
+         
 
         </View>
         <View style={styles.footerWrapper}>
@@ -136,7 +127,7 @@ class Items extends Component {
               style={styles.inputStyles}
               onBlur={this.hideButtons.bind(this)}
               onFocus={this.showButtons.bind(this)}
-              placeholder={'یه کار جدید اضافه کن'} >
+              placeholder={'add new item +'} >
             </TextInput>
             {this.state.isShowButtons &&
               <TouchableOpacity underlayColor={'rgba(150,150,150,0.65)'} onPress={() => { }} style={styles.colorSelector} >

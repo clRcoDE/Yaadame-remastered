@@ -73,10 +73,11 @@ class Introduce extends PureComponent {
 
 
     return (
-      <KeyboardAvoidingView style={styles.container} enabled >
+      <KeyboardAvoidingView style={styles.container} enabled   >
         <View style={styles.introduceListWrapper}>
           <FlatList
             data={introduce}
+            keyboardShouldPersistTaps={'handled'}
             keyExtractor={(item) => item.id}
             horizontal={true}
             pagingEnabled={true}
@@ -89,7 +90,7 @@ class Introduce extends PureComponent {
                 <View style={styles.textWrapper}><Text style={styles.introduceText} >{item.text}</Text></View>
                 {item.id === "4" &&
                   <View style={styles.inputWrapper}>
-                    <TextInput onChangeText={text => this.setText(text)} placeholder={'your name here'}  />
+                    <TextInput   onChangeText={text => this.setText(text)} placeholder={'your name here'}  />
                   </View>}
                 <View style={styles.nextWrapper}>
                   <TouchableOpacity style={styles.TouchableStyles} onPress={() => { this.toNext(item.id, IntPosition) }} >

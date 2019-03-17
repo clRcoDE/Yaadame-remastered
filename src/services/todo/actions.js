@@ -129,13 +129,13 @@ const addItemBegins = () => {
 }
 
 
-const  addItemSuccess = (newItem,listId) => {
+const  addItemSuccess = (newItem) => {
     return {
         type:ADD_ITEM_SUCCEED,
         payload:{
 
             newItem,
-            listId
+            
         }
     }
 }
@@ -263,7 +263,7 @@ export const addItem = (userId , listId , newItem , onSuccess) => {
               })
         })
         .then(response =>{if(response.ok){return response.json()}})
-        .then((result) => {dispatch(addItemSuccess(result,listId)); onSuccess()})
+        .then((result) => {dispatch(addItemSuccess(result)); onSuccess()})
         .catch(dispatch(addItemFailure()))
     }
 }
