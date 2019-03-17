@@ -2,19 +2,22 @@
 
 import {createAppContainer , createSwitchNavigator , createStackNavigator , createDrawerNavigator} from 'react-navigation'
 
-// import { View , Text } from 'react-native'
-
+import { View , Text , Dimensions} from 'react-native'
+const dim = Dimensions.get('window')
 import About from '../pages/About'
 import Loading from '../pages/Loading'
 import Lists from '../pages/Lists'
 import Settings from '../pages/Settings'
 import Items from '../pages/Items'
 import Introduce from  '../pages/Introduce'
+import  CustomDrawer from '../components/CustomeDrawer'
+
+
 
 
 const ListsStack = createStackNavigator(
     {
-        Lists:Lists,
+        ListsPath:Lists,
         ItemScreen:Items
     },
     {
@@ -29,9 +32,13 @@ const HomeDrawerStack = createDrawerNavigator(
     {
         About:About,
         Settings:Settings,
-        ListsPath:ListsStack
+        Lists:ListsStack
     },{
-        initialRouteName:'ListsPath',
+        
+        backBehavior:'initialRoute',
+        initialRouteName:'Lists',
+        contentComponent: CustomDrawer,
+        drawerWidth:dim.width*(70/100)
     }
 )
 

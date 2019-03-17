@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard , Dimensions} from 'react-native'
 import { connect } from 'react-redux'
 import { addList } from '../services/todo//actions'
 
@@ -8,13 +8,15 @@ import { addList } from '../services/todo//actions'
 /*******************************************  assets   ***************************************** */
 
 
+
+
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
+import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
+import AntIcon from 'react-native-vector-icons/AntDesign'
 
-
-
-
+const dim = Dimensions.get('window')
 
 
 class Lists extends Component {
@@ -76,12 +78,18 @@ class Lists extends Component {
   /*****************************************   render   ******************************************* */
 
 
+  emptyComponent=()=>(<View style={styles.emptyLists}>
+    <Text style={styles.emptyListsText}> You can add New Lists from downside <AntIcon name={'down'} color={'#aaa'} size={25} /></Text>
+    </View>)
+
+
+
   render() {
     return (
       <View style={styles.container} >
         <View style={styles.headerWrapper}>
           <TouchableOpacity style={styles.menuListButton} onPress={this.drawer.bind(this)}>
-            <IonIcons size={50} color={'#eee'} name={'ios-list'} />
+            <IonIcons size={35} color={'#2172e0'} name={'ios-list'} />
           </TouchableOpacity>
           <View style={styles.headerTextWrapper}>
             <Text style={styles.headerText} >Lists</Text>
@@ -89,7 +97,7 @@ class Lists extends Component {
         </View>
         <View style={styles.listsWrapper}>
           <FlatList
-          ListEmptyComponent={()=>(<View style={styles.emptyComponent} ><Text>add list there</Text></View>)}
+          ListEmptyComponent={this.emptyComponent}
             data={this.props.listsReducer.lists}
             keyExtractor={item => item.title}
             renderItem={({ item }) => (
@@ -97,11 +105,13 @@ class Lists extends Component {
 
                 <View style={styles.elementWrapper}>
                   <View style={styles.elementIcon}>
-                    <EntypoIcon name={"circle"} size={25} color={"#1fe062"} />
+                    <EntypoIcon name={"circle"} size={20} color={"#2172e0"} />
                   </View>
                   <View style={styles.elementText}>
                     <Text>{item.title}</Text></View>
-                  <View style={styles.elementDetails}></View>
+                  <View style={styles.elementDetails}>
+                  <MaterialIcons name={'drag-handle'} size={25} color={'#222'}/>
+                  </View>
                 </View>
               </TouchableOpacity  >)}
 
@@ -111,22 +121,12 @@ class Lists extends Component {
         </View>
         <View style={styles.footerWrapper}>
           <View style={styles.inputNewList}>
-            <View style={styles.addButtonWrapper}>
-              {this.state.isShowButtons &&
-                <TouchableOpacity
-                  underlayColor={'rgba(33, 86, 158,0.7)'}
-                  style={styles.addButton}
-                  onPress={this.addNewList.bind(this)} >
-                  <Text>Add</Text>
-                </TouchableOpacity>}
-            </View>
-            {this.state.isShowButtons &&
-              <TouchableOpacity
-                underlayColor={'rgba(255,255,255,0.9)'}
-                onPress={this.clearInput.bind(this)}
-                style={styles.clearButton}>
-                <EvilIcon name={'close'} size={18} color='#222' />
+
+          {this.state.isShowButtons &&
+              <TouchableOpacity underlayColor={'rgba(150,150,150,0.65)'} onPress={() => { }} style={styles.colorSelector} >
+                <EntypoIcon name={"circle"} size={20} color={"#2172e0"} />
               </TouchableOpacity>}
+
 
             <TextInput
               underlayColor={'rgba(255,255,255,0.65)'}
@@ -137,18 +137,30 @@ class Lists extends Component {
               style={styles.inputStyles}
               onBlur={this.hideButtons.bind(this)}
               onFocus={this.showButtons.bind(this)}
-              placeholder={'Add New List Here +'} 
-              onSubmitEditing={this.addNewList.bind(this)}
-              
-              >
+              placeholder={' Type new List  '} >
             </TextInput>
+
+            
             {this.state.isShowButtons &&
               <TouchableOpacity
-                underlayColor={'rgba(150,150,150,0.65)'}
-                onPress={() => { }}
-                style={styles.colorSelector} >
-                <EntypoIcon name={"circle"} size={25} color={"#1fe062"} />
+                underlayColor={'rgba(255,255,255,0.9)'}
+                onPress={this.clearInput.bind(this)}
+                style={styles.clearButton}>
+                <EvilIcon name={'close'} size={18} color='#222' />
               </TouchableOpacity>}
+
+              <View style={styles.addButtonWrapper}>
+              {this.state.isShowButtons &&
+                <TouchableOpacity
+                  underlayColor={'rgba(33, 86, 158,0.7)'}
+                  style={styles.addButton}
+                  onPress={this.addNewList.bind(this)} >
+                  <Text style={styles.AddButtonStyles}  >Add</Text>
+                </TouchableOpacity>}
+            </View>
+
+
+            
           </View>
         </View>
 
@@ -163,23 +175,36 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
+    backgroundColor:'#f5f5f5'
   },
   headerWrapper: {
     // flex:5,
     height: 150,
-    backgroundColor: '#336',
+    backgroundColor: 'transparent',
+    borderBottomWidth:3,
+    borderBottomColor:'rgba(33, 114, 224,0.65)',
 
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
   },
   listsWrapper: {
     flex: 8,
-    backgroundColor: '#eee'
+    backgroundColor: 'transparent'
 
   },
   footerWrapper: {
     // flex:2,
-    backgroundColor: 'green'
+    backgroundColor: 'transparent'
+  },
+  inputNewList: {
+    backgroundColor: 'transparent',
+    minHeight: 65,
+    // paddingRight:25,
+    position: "relative",
+    zIndex: 1,
+    // borderWidth: 1,
+    // flexWrap:"wrap-reverse",
+    flexDirection: 'row',
   },
   menuListButton: {
     position: 'absolute',
@@ -192,37 +217,44 @@ const styles = StyleSheet.create({
     // borderWidth:3,
     borderColor: '#fff',
     marginLeft: 20,
+    marginBottom:10
   },
   headerText: {
     fontSize: 35,
-    color: '#eee',
+    color: '#222',
     fontWeight: '600',
   },
-  inputStyles: {
+  footerWrapper: {
+    // flex:2,
+    backgroundColor: 'transparent'
+  },
+inputStyles: {
     // textAlign: 'center',
     flex: 1,
-    fontStyle: 'italic',
     fontSize: 20,
     // borderWidth:2,
     // borderColor:'gold',
     padding: 16,
-    marginBottom: 2
+    marginBottom: 2,
+    fontStyle:'italic'
   },
-  inputNewList: {
-    backgroundColor: '#fff',
+inputNewList: {
+    backgroundColor: 'transparent',
     minHeight: 65,
     justifyContent: 'flex-end',
     alignItems: 'flex-end',
     // paddingRight:25,
     position: "relative",
     zIndex: 2,
-    borderWidth: 1,
+    // borderWidth: 1,
+    borderTopWidth:2,
+    borderTopColor: 'rgba(33, 114, 224,0.65)',
     borderRadius: 3,
     borderColor: '#666',
     // flexWrap:"wrap-reverse",
     flexDirection: 'row',
   },
-  addButtonWrapper: {
+addButtonWrapper: {
     marginBottom: 12,
     margin: 6
   },
@@ -237,16 +269,44 @@ const styles = StyleSheet.create({
     marginRight: 6
   },
   colorSelector: {
-    marginBottom: 15,
-    marginHorizontal: 6,
-    borderRadius: 100
+    // marginBottom: 15,
+    // marginHorizontal: 6,
+    height:60,
+    justifyContent: 'center',
+    alignItems: 'center',
+    width:50,
+    // borderWidth:3
+  },
+  
+  emptyLists: {
+    height: dim.height*(55/100),
+    borderWidth: 2,
+    borderRadius: 15,
+    borderColor: 'rgba(200,200,200,0.7)',
+    justifyContent: 'center',
+    alignItems: 'center',
+    
+    padding:30,
+    margin:25
+  },
+  emptyListsText:{
+fontWeight:'200',
+textAlign:'center',
+color:'#bbb',
+fontSize:35,
+fontStyle:'normal',
+lineHeight:60
   },
   listElement: {
 
-    height: 50,
-    borderBottomWidth: 1,
+    height:60,
+    // margin:10,
+    marginHorizontal:15,
+    paddingVertical:15,
     justifyContent: 'center',
-
+    borderBottomWidth:3,
+    borderBottomColor:'rgba(220,220,220,0.7)',
+    // borderWidth:2
 
   },
   emptyComponent:{
@@ -266,7 +326,30 @@ const styles = StyleSheet.create({
     flex: 1,
     // justifyContent: 'center',
     alignItems: 'center',
+  },
+  elementIcon:{
+    width:50,
+    justifyContent: 'center',
+    alignItems: 'center',
+
+  },
+  elementText:{
+    flex:1,
+    padding:10
+  },
+  elementDetails:{
+    width:50,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  addButtonStyles:{
+    color:'#f5f5f5',
+    
+  },
+  AddButtonStyles:{
+    color:'#f5f5f5'
   }
+  
 })
 const mapStateToProps = (state) => {
   return {

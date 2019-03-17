@@ -194,11 +194,12 @@ const  deleteItemFailure = () => {
 
 
 
+const baseURL = 'http://10.0.2.2:3000'
 
 export const getExistingLists =(userId) =>{
     return dispatch =>{
         dispatch(getListsBegins())
-        fetch(`http://10.0.2.2:3000/users/${userId}/lists`)
+        fetch(`${baseURL}/users/${userId}/lists`)
         
         .then(response =>{if(response.ok){return response.json()}})
         .then((result) => dispatch(getListsSuccess(result)))
@@ -210,7 +211,7 @@ export const getExistingLists =(userId) =>{
 export const addList =(userId,listName,onSuccess) =>{
     return dispatch =>{
         dispatch(addListBegins())
-        fetch(`http://10.0.2.2:3000/users/${userId}/lists`,{
+        fetch(`${baseURL}/users/${userId}/lists`,{
             method:'POST',
             headers:{"Content-Type": "application/json"},
             body:JSON.stringify({
@@ -238,7 +239,7 @@ export const deleteList =() =>{
 export const getExistingItems = (userId , listId  ) =>{
     return dispatch =>{
         dispatch(getListsBegins())
-        fetch(`http://10.0.2.2:3000/lists/${listId}/items?userId=${userId}`)
+        fetch(`${baseURL}/lists/${listId}/items?userId=${userId}`)
         
         .then(response =>{if(response.ok){return response.json()}})
         .then((result) => dispatch(getItemsSuccess(result, listId)))
@@ -250,7 +251,7 @@ export const getExistingItems = (userId , listId  ) =>{
 export const addItem = (userId , listId , newItem , onSuccess) => {
     return dispatch => {
         dispatch(addListBegins())
-        fetch(`http://10.0.2.2:3000/lists/${listId}/items?userId=${userId}`,{
+        fetch(`${baseURL}/lists/${listId}/items?userId=${userId}`,{
             method:'POST',
             headers:{"Content-Type": "application/json"},
             body:JSON.stringify({
@@ -269,8 +270,19 @@ export const addItem = (userId , listId , newItem , onSuccess) => {
 }
 
 
-export const toggleItem = () => {
+export const toggleItem = (userId , listId , previousStatus , onSuccess ) => {
     return dispatch => {
+dispatch(toggleItemBegins())
+fetch(`${baseURL}/lists/${listId}/items?userId=${userId}`,{
+    method:'PATCH',
+    headers:{"Content-Type": "application/json"},
+    body:JSON.stringify({
+        isCompleted:!previousStatus
+    })
+
+}).then(response=> { if(response.ok){return response.json()}})
+.then(result => {dispatch(toggleItemSuccess(result)); onSuccess() })
+.catch(e=>dispatch(toggleItemFailure()))
 
     }
 }
