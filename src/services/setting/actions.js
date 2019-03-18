@@ -4,10 +4,10 @@ import {SET_THEME} from './types'
 
 
 
-export const changeTheme = (theme)=> {
+export const changeTheme = ()=> {
 
     return {
         type:SET_THEME,
-        theme
+        
     }
 }

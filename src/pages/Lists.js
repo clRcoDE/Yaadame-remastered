@@ -210,7 +210,7 @@ const styles = StyleSheet.create({
     position: 'absolute',
     top: 0,
     left: 0,
-    marginLeft: 20,
+    marginLeft: 16,
     marginTop: 20,
     width:30,
     height:30,

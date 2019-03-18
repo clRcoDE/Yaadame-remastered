@@ -36,7 +36,7 @@ const HomeDrawerStack = createDrawerNavigator(
     },{
         
         backBehavior:'initialRoute',
-        initialRouteName:'Lists',
+        initialRouteName:'Settings',
         contentComponent: CustomDrawer,
         drawerWidth:dim.width*(70/100)
     }
