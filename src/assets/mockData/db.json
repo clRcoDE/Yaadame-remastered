@@ -2,9 +2,6 @@
   "users": [
     {
       "id": "james"
-    },
-    {
-      "id": "vevedvd"
     }
   ],
   "lists": [
@@ -12,16 +9,6 @@
       "userId": "james",
       "title": "james shop list",
       "id": 1
-    },
-    {
-      "userId": "vevedvd",
-      "title": "ergeg",
-      "id": 2
-    },
-    {
-      "userId": "vevedvd",
-      "title": "rthrthr",
-      "id": 3
     }
   ],
   "items": [
@@ -31,13 +18,6 @@
       "title": "buy milk",
       "isCompleted": false,
       "id": 1
-    },
-    {
-      "userId": "vevedvd",
-      "listId": "3",
-      "title": "ergeer",
-      "isCompleted": false,
-      "id": 2
     }
   ]
 }

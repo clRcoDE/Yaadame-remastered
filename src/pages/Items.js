@@ -66,8 +66,17 @@ class Items extends Component {
   /***********************************************   change item  activity    *********************************************** */
 
 
-  changeActivity = ({ userId , listId , id , isCompleted }) => {
-  this.props.toggleItem( userId , listId , id , isCompleted , onSuccess )
+  changeActivity = ({ id , isCompleted }) => {
+    // console.log(userId , listId , id , isCompleted)
+
+    onSuccess=()=>{
+      return true
+    }
+
+  this.props.toggleItem(  id , isCompleted , onSuccess )
+
+
+
   }
 
 
@@ -108,13 +117,13 @@ class Items extends Component {
               <TouchableOpacity onPress={() => this.changeActivity(item)} style={styles.listElements}>
                 <View style={styles.elementWrapper}>
                   <View style={styles.activityWrapper}>
-                    {item.isCompleted && <EntypoIcon name={"checkcircle"} size={20} color={"#1fe062"} />}
+                    {item.isCompleted && <AntIcon name={"checkcircleo"} size={20} color={"#1fe062"} />}
                     {!item.isCompleted && <EntypoIcon name={"circle"} size={20} color={"#444"} />}
 
 
                   </View>
                   <View style={styles.detailsWrapper}>
-                    <Text>{item.title}</Text>
+                    <Text  style={[styles.todoItemText,{textDecorationLine:item.isCompleted?'line-through':'none'}]} >{item.title}</Text>
                   </View>
                   <View style={styles.optionsWrapper}></View>
                 </View>
@@ -259,7 +268,12 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     marginLeft: 20,
-    marginTop: 15
+    marginTop: 20,
+    width:30,
+    height:30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // borderWidth:1
   },
   headerTextWrapper: {
     // borderWidth:3,
@@ -320,6 +334,9 @@ const styles = StyleSheet.create({
     alignItems: 'center',
     width: 50,
     // borderWidth:3
+  },
+  AddButtonStyles:{
+    color:'#f5f5f5'
   }
 
 })

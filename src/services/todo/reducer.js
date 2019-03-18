@@ -142,29 +142,10 @@ export default todo = (state = initialState, action) => {
             return state
 
         case TOGGLE_ITEM_BEGINS:
-            const listIndexTog1 = state.lists.findIndex(({ id }) => id === action.payload.listId)
-            const itemIndexTog1 = state.lists[listIndexTog1].items.findIndex(({ id }) => id === action.payload.itemId)
-
-            return {
-                ...state,
-                lists: [
-                    ...state.lists.slice(0, listIndexTog1),
-                    {
-                        ...state.lists[listIndexTog1],
-                        items: [
-                            ...state.lists[listIndexTog1].items.slice(0, itemIndexTog1),
-                            {
-                                ...state.lists[listIndexTog1].items[itemIndexTog1],
-                            },
-                            ...state.lists[listIndexTog1].items.slice(itemIndexTog1 + 1)
-                        ]
-                    },
-                    ...state.lists.slice(listIndexTog1 + 1)
-                ]
-            }
+            return state
         case TOGGLE_ITEM_SUCCEED:
-            const listIndexTog2 = state.lists.findIndex(({ id }) => id === action.payload.listId)
-            const itemIndexTog2 = state.lists[listIndexTog2].items.findIndex(({ id }) => id === action.payload.itemId)
+            const listIndexTog2 = state.lists.findIndex(({ id }) => id == action.payload.editedItem.listId)
+            const itemIndexTog2 = state.lists[listIndexTog2].items.findIndex(({ id }) => id == action.payload.editedItem.id)
 
             return {
                 ...state,
@@ -176,7 +157,7 @@ export default todo = (state = initialState, action) => {
                             ...state.lists[listIndexTog2].items.slice(0, itemIndexTog2),
                             {
                                 ...state.lists[listIndexTog2].items[itemIndexTog2],
-                                isCompleted: !state.lists[listIndexTog2].items[itemIndexTog2].isCompleted
+                                isCompleted: action.payload.editedItem.isCompleted
                             },
                             ...state.lists[listIndexTog2].items.slice(itemIndexTog2 + 1)
                         ]
@@ -189,27 +170,7 @@ export default todo = (state = initialState, action) => {
 
 
         case TOGGLE_ITEM_FAILED:
-            const listIndexTog3 = state.lists.findIndex(({ id }) => id === action.payload.listId)
-            const itemIndexTog3 = state.lists[listIndexTog3].items.findIndex(({ id }) => id === action.payload.itemId)
-
-            return {
-                ...state,
-                lists: [
-                    ...state.lists.slice(0, listIndexTog3),
-                    {
-                        ...state.lists[listIndexTog3],
-                        items: [
-                            ...state.lists[listIndexTog3].items.slice(0, itemIndexTog3),
-                            {
-                                ...state.lists[listIndexTog3].items[itemIndexTog3],
-                            },
-                            ...state.lists[listIndexTog3].items.slice(itemIndexTog3 + 1)
-                        ]
-                    },
-                    ...state.lists.slice(listIndexTog3 + 1)
-                ]
-            }
-
+            return state
 
         case DELETE_ITEM_BEGINS:
 

@@ -17,19 +17,19 @@ export const introduce = [
     //     id:"1"
     // },
     // {
-    //     icon:<AntIcon color={'#4286f4'} size={150} name={'cloudo'} />,
+    //     icon:<AntIcon color={'#4286f4'} size={115} name={'cloudo'} />,
     //     text:"Completely cloud connected , you never miss a shot ;)",
     //     button:"next",
     //     id:"2"
     // },
     // {
-    //     icon:<EntypoIcon  color={'#4286f4'} size={150} name={'add-to-list'} />,
+    //     icon:<EntypoIcon  color={'#4286f4'} size={115} name={'add-to-list'} />,
     //     text:"you can categorize your Todos easily with lists",
     //     button:"next",
     //     id:"3"
     // },
     {
-            icon:<AntIcon color={'#4286f4'} size={150} name={'arrowdown'}/>,
+            icon:<AntIcon color={'#4286f4'} size={115} name={'arrowdown'}/>,
             text:"First Enter Your username",
             button:"I'm Done ",
             id:"4"

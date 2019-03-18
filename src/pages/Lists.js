@@ -137,7 +137,7 @@ class Lists extends Component {
               style={styles.inputStyles}
               onBlur={this.hideButtons.bind(this)}
               onFocus={this.showButtons.bind(this)}
-              placeholder={' Type new List  '} >
+              placeholder={' Type new List here '} >
             </TextInput>
 
             
@@ -211,7 +211,12 @@ const styles = StyleSheet.create({
     top: 0,
     left: 0,
     marginLeft: 20,
-    marginTop: 15
+    marginTop: 20,
+    width:30,
+    height:30,
+    justifyContent: 'center',
+    alignItems: 'center',
+    // borderWidth:1
   },
   headerTextWrapper: {
     // borderWidth:3,

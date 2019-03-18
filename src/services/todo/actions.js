@@ -155,9 +155,12 @@ const toggleItemBegins = () => {
 }
 
 
-const  toggleItemSuccess = () => {
+const  toggleItemSuccess = (editedItem) => {
     return {
-        type:TOGGLE_ITEM_SUCCEED
+        type:TOGGLE_ITEM_SUCCEED,
+        payload:{
+            editedItem
+        }
     }
 }
 
@@ -270,10 +273,11 @@ export const addItem = (userId , listId , newItem , onSuccess) => {
 }
 
 
-export const toggleItem = (userId , listId , previousStatus , onSuccess ) => {
+export const toggleItem = ( id , previousStatus , onSuccess ) => {
+
     return dispatch => {
 dispatch(toggleItemBegins())
-fetch(`${baseURL}/lists/${listId}/items?userId=${userId}`,{
+fetch(`${baseURL}/items/${id}`,{
     method:'PATCH',
     headers:{"Content-Type": "application/json"},
     body:JSON.stringify({

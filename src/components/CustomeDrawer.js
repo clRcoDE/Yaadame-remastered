@@ -65,9 +65,9 @@ const styles = StyleSheet.create({
         // backgroundColor:'green',
         justifyContent: 'center',
         alignItems: 'center',
-        margin:20,
-        borderBottomColor:'#aaa',
-        borderBottomWidth:2
+        margin:18,
+        borderBottomColor:'rgba(33, 114, 224,0.55)',
+        borderBottomWidth:3
     },
     userIdText:{
         fontFamily:'sans-serif',
@@ -83,8 +83,8 @@ const styles = StyleSheet.create({
     },
     touchableStyles:{
         // borderWidth:3,
-        width:dim.width*(70/100),
-        paddingHorizontal: 20,
+        width:dim.width*(65/100),
+        paddingHorizontal: 24,
         // borderColor:'blue',
         // flexDirection: 'row',
     },
@@ -99,7 +99,7 @@ const styles = StyleSheet.create({
 
     },
     elementText:{
-        paddingLeft:16
+        paddingLeft:22
     }
     
 })
