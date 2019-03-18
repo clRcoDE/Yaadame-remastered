@@ -44,9 +44,12 @@ const styles = StyleSheet.create({
   themeTouchable:{
     // height:50,
     // width:50,
+    
     padding:25,
     borderRadius:50,
-    backgroundColor:'red'
+    backgroundColor:'red',
+    justifyContent:'center',
+    alignItems:'center'
   }
 })
 

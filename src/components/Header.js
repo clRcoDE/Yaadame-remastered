@@ -11,7 +11,7 @@ export default class Header extends Component {
             {this.props.icon}
           </TouchableOpacity>
           <View style={styles.headerTextWrapper}>
-            <Text style={[styles.headerText,{color:theme.fontColor}]} >{this.props.headerTitle}</Text>
+            <Text style={[styles.headerText,{color:this.context.fontcolor}]} >{this.props.headerTitle}</Text>
           </View>
         </View>
       </View>

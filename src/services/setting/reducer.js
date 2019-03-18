@@ -4,7 +4,7 @@
 import {SET_THEME} from './types'
 import { themes  } from '../../components/ThemeContext'
 const initialState = {
-    theme:themes.light
+    theme:themes.dark
 }
 
 
@@ -15,9 +15,17 @@ export default setting =( state = initialState , action) =>{
        
         return {
             ...state,
-            theme:state.theme === themes.light ? themes.dark : themes.light
+            theme:state.theme.equal(themes.light) ? themes.dark : themes.light
         }
         default:
         return state
     }
 }
+
+
+
+
+
+
+
+

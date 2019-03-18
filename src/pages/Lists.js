@@ -3,7 +3,7 @@ import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard
 import { connect } from 'react-redux'
 import { addList } from '../services/todo//actions'
 
-
+import {ThemeContext} from '../components/ThemeContext'
 
 /*******************************************  assets   ***************************************** */
 
@@ -15,6 +15,9 @@ import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import AntIcon from 'react-native-vector-icons/AntDesign'
+
+
+
 
 const dim = Dimensions.get('window')
 
@@ -78,21 +81,23 @@ class Lists extends Component {
   /*****************************************   render   ******************************************* */
 
 
-  emptyComponent=()=>(<View style={styles.emptyLists}>
+  emptyComponent=()=>(<View style={[styles.emptyLists,{borderColor:this.context.highlight}]}>
     <Text style={styles.emptyListsText}> You can add New Lists from downside <AntIcon name={'down'} color={'#aaa'} size={25} /></Text>
     </View>)
 
 
 
   render() {
+
+    let theme = this.context
     return (
-      <View style={styles.container} >
-        <View style={styles.headerWrapper}>
+      <View style={[styles.container,{backgroundColor:theme.background}]} >
+        <View style={[styles.headerWrapper,{borderBottomColor:theme.foreground}]}>
           <TouchableOpacity style={styles.menuListButton} onPress={this.drawer.bind(this)}>
-            <IonIcons size={35} color={'#2172e0'} name={'ios-list'} />
+            <IonIcons size={35} color={theme.icons} name={'ios-list'} />
           </TouchableOpacity>
           <View style={styles.headerTextWrapper}>
-            <Text style={styles.headerText} >Lists</Text>
+            <Text style={[styles.headerText,{color:theme.fontcolor}]} >Lists</Text>
           </View>
         </View>
         <View style={styles.listsWrapper}>
@@ -171,18 +176,20 @@ class Lists extends Component {
 }
 
 
+Lists.contextType = ThemeContext
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor:'#f5f5f5'
+    
   },
   headerWrapper: {
     // flex:5,
     height: 150,
     backgroundColor: 'transparent',
     borderBottomWidth:3,
-    borderBottomColor:'rgba(33, 114, 224,0.65)',
+  
 
     justifyContent: 'flex-end',
     alignItems: 'flex-start',
@@ -226,7 +233,6 @@ const styles = StyleSheet.create({
   },
   headerText: {
     fontSize: 35,
-    color: '#222',
     fontWeight: '600',
   },
   footerWrapper: {
@@ -287,7 +293,7 @@ addButtonWrapper: {
     height: dim.height*(55/100),
     borderWidth: 2,
     borderRadius: 15,
-    borderColor: 'rgba(200,200,200,0.7)',
+    
     justifyContent: 'center',
     alignItems: 'center',
     

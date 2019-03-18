@@ -16,7 +16,7 @@ import reducer from './src/services/index'
 
 
 
-import { ThemeContext , themes } from './src/components/ThemeContext' 
+import { ThemeContext ,themes } from './src/components/ThemeContext' 
 
 export const store = createStore(reducer , applyMiddleware(thunk))
 export default class App extends Component{
@@ -25,7 +25,7 @@ export default class App extends Component{
     
     return (
     <Provider store={store}>
-    <ThemeContext.Provider value={store.settingReducer.theme}>
+    <ThemeContext.Provider value={store.getState().settingReducer.theme}>
     <AppContainer/>
     </ThemeContext.Provider>
     </Provider>);
