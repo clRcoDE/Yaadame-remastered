@@ -35,13 +35,13 @@ const styles = StyleSheet.create({
 
     container:{
 
-        flex:1,    
+        // flex:1,    
     // justifyContent: 'center',
-    backgroundColor:'transparent'
+    backgroundColor:'transparent',
+    height:200
     },
     headerWrapper: {
-      // flex:5,
-      height: 150,
+      flex:1,
       backgroundColor: 'transparent',
       borderBottomWidth:3,
       borderBottomColor:'rgba(33, 114, 224,0.65)',

@@ -36,7 +36,7 @@ const HomeDrawerStack = createDrawerNavigator(
     },{
         
         backBehavior:'initialRoute',
-        initialRouteName:'Settings',
+        initialRouteName:'Lists',
         contentComponent: CustomDrawer,
         drawerWidth:dim.width*(70/100)
     }
@@ -58,6 +58,8 @@ const AppSwitchNavigator = createSwitchNavigator(
     {
         LoadingPage:Loading,
         Auth:AuthStack
+    },{
+        initialRouteName:'LoadingPage'
     }
 
 )

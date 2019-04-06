@@ -4,7 +4,7 @@
 import {SET_THEME} from './types'
 import { themes  } from '../../components/ThemeContext'
 const initialState = {
-    theme:themes.dark
+    theme:themes.light
 }
 
 

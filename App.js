@@ -29,9 +29,6 @@ export default class App extends Component{
 
 <Container/>
 
-    {/* <ThemeContext.Provider value={store.getState().settingReducer.theme}>
-    <AppContainer/>
-    </ThemeContext.Provider> */}
 
 
     </Provider>);

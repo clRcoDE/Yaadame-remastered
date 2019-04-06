@@ -19,8 +19,8 @@ export default class Loading extends Component {
 
   }
   componentDidMount() {
-    // setTimeout(() => this.goto() , 1000 )
-    this.props.navigation.navigate('Settings')
+    setTimeout(() => this.goto() , 1000 )
+    // this.props.navigation.navigate('Lists')
   }
 
   render() {

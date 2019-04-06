@@ -3,6 +3,8 @@ import { Text, StyleSheet, View , Dimensions , FlatList , TouchableOpacity } fro
 import drawerData from '../assets/mockData/drawerData'
 import {connect} from 'react-redux'
 
+import {ThemeContext} from '../components/ThemeContext'
+
 const dim = Dimensions.get('window')
  class CustomeDrawer extends Component {
 
@@ -17,8 +19,9 @@ navigation.navigate(path)
 
 }
   render() {
+    let theme = this.context
     return (
-      <View style={styles.container} >
+      <View style={[styles.container,{backgroundColor:theme.background}]} >
       <View style={styles.profileWrapper}>
       <Text  style={styles.userIdText} >{this.props.profile.user.id}</Text></View>
         <View style={styles.listWrapper}>
@@ -29,10 +32,10 @@ navigation.navigate(path)
 <TouchableOpacity style={styles.touchableStyles}  onPress={()=>this.navigator(item)}  >
 
 
-    <View style={styles.touchableWrapper}>
+    <View style={[styles.touchableWrapper]}>
     
     {item.icon}
-    <Text style={styles.elementText} >{item.title}</Text>
+    <Text style={[styles.elementText,{color:theme.foreground}]} >{item.title}</Text>
     </View>
 
 
@@ -44,7 +47,7 @@ navigation.navigate(path)
     )
   }
 }
-
+CustomeDrawer.contextType = ThemeContext
 const styles = StyleSheet.create({
 
     container:{
