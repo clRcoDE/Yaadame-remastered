@@ -8,6 +8,7 @@ import Header from '../components/Header'
 import {ThemeContext} from '../components/ThemeContext'
 
 
+import IonIcons from 'react-native-vector-icons/Ionicons'
 
  class Settings extends Component {
 
@@ -17,10 +18,12 @@ import {ThemeContext} from '../components/ThemeContext'
 this.props.changeTheme()
   }
   render() {
+
     let theme = this.context
+    let headerIcon = <IonIcons size={35} color={theme.icons} name={'ios-list'} />
     return (
       <View style={[styles.container,{backgroundColor:theme.background}]} >
-        <Header headerTitle={'Settings'}  />
+        <Header headerTitle={'Settings'} headerIcon={headerIcon} navigation={this.props.navigation} />
         <TouchableOpacity style={styles.themeTouchable}  onPress={this.themer.bind(this)}>
         <Text>change theme</Text>
         </TouchableOpacity>

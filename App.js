@@ -13,7 +13,7 @@ import {createStore ,applyMiddleware} from 'redux'
 import { Provider   } from 'react-redux'
 import thunk from 'redux-thunk'
 import reducer from './src/services/index'
-
+import Container from './src/container/index'
 
 
 import { ThemeContext ,themes } from './src/components/ThemeContext' 
@@ -25,9 +25,15 @@ export default class App extends Component{
     
     return (
     <Provider store={store}>
-    <ThemeContext.Provider value={store.getState().settingReducer.theme}>
+
+
+<Container/>
+
+    {/* <ThemeContext.Provider value={store.getState().settingReducer.theme}>
     <AppContainer/>
-    </ThemeContext.Provider>
+    </ThemeContext.Provider> */}
+
+
     </Provider>);
   }
 }
