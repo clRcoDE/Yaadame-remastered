@@ -2,48 +2,6 @@
   "users": [
     {
       "id": "james"
-    },
-    {
-      "id": "kljhfwelkrfgew"
-    },
-    {
-      "id": "dfbfefrbe"
-    },
-    {
-      "id": "gn fgfrng"
-    },
-    {
-      "id": "wdqwdfqwq"
-    },
-    {
-      "id": "ytjtyj"
-    },
-    {
-      "id": "tyjtyjtt"
-    },
-    {
-      "id": "tmtm"
-    },
-    {
-      "id": "null"
-    },
-    {
-      "id": "ytjtyjtyujh"
-    },
-    {
-      "id": "rthrth"
-    },
-    {
-      "id": "ergergerg"
-    },
-    {
-      "id": "ergegerger"
-    },
-    {
-      "id": "ergerge"
-    },
-    {
-      "id": "wefwfwrg"
     }
   ],
   "lists": [
@@ -51,31 +9,6 @@
       "userId": "james",
       "title": "james shop list",
       "id": 1
-    },
-    {
-      "userId": "kljhfwelkrfgew",
-      "title": "etfgbtgergh",
-      "id": 2
-    },
-    {
-      "userId": "kljhfwelkrfgew",
-      "title": "ethg32fg3wf3wfg",
-      "id": 3
-    },
-    {
-      "userId": "kljhfwelkrfgew",
-      "title": "e4f3ef3fr",
-      "id": 4
-    },
-    {
-      "userId": "wdqwdfqwq",
-      "title": "gvf43g534g54h",
-      "id": 5
-    },
-    {
-      "userId": "wefwfwrg",
-      "title": "ergerger",
-      "id": 6
     }
   ],
   "items": [
@@ -85,41 +18,6 @@
       "title": "buy milk",
       "isCompleted": false,
       "id": 1
-    },
-    {
-      "userId": "kljhfwelkrfgew",
-      "listId": "3",
-      "title": "wefge4gfw3g3w",
-      "isCompleted": false,
-      "id": 2
-    },
-    {
-      "userId": "kljhfwelkrfgew",
-      "listId": "3",
-      "title": "g3rg5434e3g",
-      "isCompleted": false,
-      "id": 3
-    },
-    {
-      "userId": "kljhfwelkrfgew",
-      "listId": "3",
-      "title": "g3r43fg4er",
-      "isCompleted": true,
-      "id": 4
-    },
-    {
-      "userId": "kljhfwelkrfgew",
-      "listId": "3",
-      "title": "wvwvwe",
-      "isCompleted": false,
-      "id": 5
-    },
-    {
-      "userId": "wdqwdfqwq",
-      "listId": "5",
-      "title": "4545rt4hhg",
-      "isCompleted": true,
-      "id": 6
     }
   ]
 }

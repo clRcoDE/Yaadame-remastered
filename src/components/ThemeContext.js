@@ -18,8 +18,8 @@ class Theme {
 }
 
 
-export const lightTheme = new Theme('#f5f5f5','#2060ff','#333', 'rgba(75,75,75,0.5)' , '#2060ff' ,1)
-export const darkTheme = new Theme('#333','#ff4','#f5f5f5',  'rgba(225,225,225,0.5)'  ,'#f5f5f5'   ,2)
+export const lightTheme = new Theme('#f5f5f5','#2060ff','#333', 'rgba(175,175,175,0.5)' , '#2060ff' ,1)
+export const darkTheme = new Theme('#333','#f5ff42','#f5f5f5',  'rgba(255,255,255,0.5)'  ,'#f5f5f5'   ,2)
 
 
 Theme.prototype.equal = function(otherTheme){

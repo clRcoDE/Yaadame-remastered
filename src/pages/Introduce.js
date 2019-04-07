@@ -27,7 +27,9 @@ class Introduce extends PureComponent {
     this.state = {
       textInput: null,
       scrollX: new Animated.Value(0),
-      IntScrollX: 0
+      IntScrollX: 0,
+      inputError:null
+
 
     }
   }
@@ -47,7 +49,10 @@ class Introduce extends PureComponent {
 
     if (numId === 4) {
 
-
+if(!this.state.textInput){
+  this.setState({inputError:'please fill in username field'})
+  return
+}
       onSuccess =()=>{
         navigation.navigate('Home')
       }
@@ -90,7 +95,9 @@ class Introduce extends PureComponent {
                 <View style={styles.textWrapper}><Text style={styles.introduceText} >{item.text}</Text></View>
                 {item.id === "4" &&
                   <View style={styles.inputWrapper}>
-                    <TextInput   onChangeText={text => this.setText(text)} placeholder={'your name here'}  />
+                  {!!this.state.inputError && <View style={styles.errorMessage} ><Text style={styles.errorMessageText} >{this.state.inputError}</Text></View>}
+                    <TextInput    style={styles.textInputStyle}  onChangeText={text => this.setText(text)} placeholder={'your name here'}  />
+
                   </View>}
                 <View style={styles.nextWrapper}>
                   <TouchableOpacity style={styles.TouchableStyles} onPress={() => { this.toNext(item.id, IntPosition) }} >
@@ -145,7 +152,7 @@ const styles = StyleSheet.create({
     // marginHorizontal: 50,
   },
   iconWrapper: {
-    flex: 8,
+    flex: 6.5,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth:2
@@ -155,13 +162,26 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth:2,
-    paddingHorizontal: 25
+    paddingHorizontal: 35
   },
   introduceText: {
-    fontWeight: '600',
+    fontWeight: '400',
     fontFamily: Platform.OS === 'ios' ? 'San Fransico' : 'Roboto',
     textAlign: 'center',
-    fontSize:20
+    fontSize:17,
+    color:'#454545',
+    lineHeight:26
+  },
+  errorMessage:{
+paddingVertical:2,
+paddingHorizontal:8,
+borderRadius:5,
+backgroundColor:'#ff2634'
+  },
+  errorMessageText:{
+    color:'#f5f5f5',
+    fontWeight:'800',
+    fontSize:16
   },
   nextWrapper: {
     flex: 2,
@@ -200,6 +220,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     // borderWidth:3,
     // borderColor:'red'
+  },
+  textInputStyle:{
+    height:35
   }
 })
 

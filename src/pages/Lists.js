@@ -106,17 +106,18 @@ class Lists extends Component {
           ListEmptyComponent={this.emptyComponent}
             data={this.props.listsReducer.lists}
             keyExtractor={item => item.title}
+            extraData={theme}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => { this.navToTodo(item) }} style={styles.listElement}>
+              <TouchableOpacity onPress={() => { this.navToTodo(item) }} style={[styles.listElement,{borderBottomColor:theme.highlight}]}>
 
                 <View style={styles.elementWrapper}>
                   <View style={styles.elementIcon}>
-                    <EntypoIcon name={"circle"} size={20} color={"#2172e0"} />
+                    <EntypoIcon name={"circle"} size={20} color={theme.foreground} />
                   </View>
                   <View style={styles.elementText}>
-                    <Text>{item.title}</Text></View>
+                    <Text  style={[{color:theme.fontcolor}]} >{item.title}</Text></View>
                   <View style={styles.elementDetails}>
-                  <MaterialIcons name={'drag-handle'} size={25} color={'#222'}/>
+                  <MaterialIcons name={'drag-handle'} size={25} color={theme.fontcolor}/>
                   </View>
                 </View>
               </TouchableOpacity  >)}
@@ -126,24 +127,26 @@ class Lists extends Component {
 
         </View>
         <View style={styles.footerWrapper}>
-          <View style={styles.inputNewList}>
+          <View style={[styles.inputNewList,{borderTopColor: theme.foreground}]}>
 
           {this.state.isShowButtons &&
               <TouchableOpacity underlayColor={'rgba(150,150,150,0.65)'} onPress={() => { }} style={styles.colorSelector} >
-                <EntypoIcon name={"circle"} size={20} color={"#2172e0"} />
+                <EntypoIcon name={"circle"} size={20} color={theme.foreground} />
               </TouchableOpacity>}
 
 
             <TextInput
               underlayColor={'rgba(255,255,255,0.65)'}
-              value={this.state.textInput}
+              value={this.state.isShowButtons ? this.state.textInput : ''  }
               onChangeText={(text) => this.setListName(text)}
               multiline={true}
-              maxLength={36}
-              style={styles.inputStyles}
+              maxLength={64}
+              style={[styles.inputStyles,{color:theme.fontcolor}]}
               onBlur={this.hideButtons.bind(this)}
               onFocus={this.showButtons.bind(this)}
-              placeholder={' Type new List here '} >
+              placeholder={' Type new List here '} 
+              placeholderTextColor={theme.highlight}
+              >
             </TextInput>
 
             
@@ -152,16 +155,16 @@ class Lists extends Component {
                 underlayColor={'rgba(255,255,255,0.9)'}
                 onPress={this.clearInput.bind(this)}
                 style={styles.clearButton}>
-                <EvilIcon name={'close'} size={18} color='#222' />
+                <EvilIcon name={'close'} size={18} color={theme.highlight} />
               </TouchableOpacity>}
 
               <View style={styles.addButtonWrapper}>
               {this.state.isShowButtons &&
                 <TouchableOpacity
                   underlayColor={'rgba(33, 86, 158,0.7)'}
-                  style={styles.addButton}
+                  style={[styles.addButton,{backgroundColor:theme.foreground}]}
                   onPress={this.addNewList.bind(this)} >
-                  <Text style={styles.AddButtonStyles}  >Add</Text>
+                  <Text style={[styles.AddButtonStyles,{color:theme.background}]}  >Add</Text>
                 </TouchableOpacity>}
             </View>
 
@@ -260,7 +263,7 @@ inputNewList: {
     zIndex: 2,
     // borderWidth: 1,
     borderTopWidth:2,
-    borderTopColor: 'rgba(33, 114, 224,0.65)',
+    
     borderRadius: 3,
     borderColor: '#666',
     // flexWrap:"wrap-reverse",
@@ -271,7 +274,6 @@ addButtonWrapper: {
     margin: 6
   },
   addButton: {
-    backgroundColor: '#2172e0',
     borderRadius: 3,
     padding: 8
   },
@@ -317,7 +319,7 @@ lineHeight:60
     paddingVertical:15,
     justifyContent: 'center',
     borderBottomWidth:3,
-    borderBottomColor:'rgba(220,220,220,0.7)',
+    
     // borderWidth:2
 
   },

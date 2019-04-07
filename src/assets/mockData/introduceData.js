@@ -12,7 +12,7 @@ export const introduce = [
 
     {
         icon:<SimpleLineIcons  color={'#4286f4'} size={125} name={'check'} />,
-        text:"Welcome to Yaadame! , Yaadame is everything you need from a Todo App : Simple . Capable . Performant ",
+        text:"Welcome to Yaadame! , Yaadame is everything you need from a Todo App :\n Simple . Capable . Performant ",
         button:"next",
         id:"1"
     },

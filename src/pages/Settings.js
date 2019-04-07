@@ -16,30 +16,34 @@ class Settings extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      switchTranslate: new Animated.Value(2)
+      switchTranslate: new Animated.Value(4),
+      toggle:false
     }
   }
 
   themer = () => {
-    this.props.changeTheme()
-    this.animateSwitchCircle()
+   
+    if(!this.state.toggle){
+      this.props.changeTheme()
+      this.setState(prev=>({toggle:!prev.toggle}))
+      Animated.timing(this.state.switchTranslate, {
+        toValue: 32,
+        duration: 300,
+        useNativeDriver:true
+        // easing: Easing.out()
+      }).start()
+    }else{
+      this.props.changeTheme()
+      this.setState(prev=>({toggle:!prev.toggle}))
+      Animated.timing(this.state.switchTranslate, {
+        toValue: 4,
+        duration: 300,
+        useNativeDriver:true
+      }).start()
+    }
   }
 
-  animateSwitchCircle = () => {
-if(this.state.switchTranslate._value === 2 ){
-    Animated.timing(this.state.switchTranslate, {
-      toValue: 32,
-      duration: 500,
-      // easing: Easing.out()
-    }).start()
-  }else{
-    Animated.timing(this.state.switchTranslate, {
-      toValue: 2,
-      duration: 500,
-      // easing: Easing.out()
-    }).start()
-  }
-  }
+ 
   render() {
 
     let theme = this.context

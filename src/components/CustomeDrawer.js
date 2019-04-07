@@ -9,11 +9,10 @@ const dim = Dimensions.get('window')
  class CustomeDrawer extends Component {
 
 
-
+ 
 
 navigator=({path})=>{
  const {navigation} = this.props
-
 navigation.navigate(path)
 
 
@@ -22,12 +21,13 @@ navigation.navigate(path)
     let theme = this.context
     return (
       <View style={[styles.container,{backgroundColor:theme.background}]} >
-      <View style={styles.profileWrapper}>
-      <Text  style={styles.userIdText} >{this.props.profile.user.id}</Text></View>
+      <View style={[styles.profileWrapper,{borderBottomColor:theme.foreground}]}>
+      <Text  style={[styles.userIdText,{color:theme.foreground}]} >{this.props.profile.user.id}</Text></View>
         <View style={styles.listWrapper}>
         <FlatList 
         data={drawerData}
         keyExtractor={item=>item.id}
+        extraData={theme}
         renderItem={({item})=>(<View style={styles.navigationElement} >
 <TouchableOpacity style={styles.touchableStyles}  onPress={()=>this.navigator(item)}  >
 
@@ -35,7 +35,7 @@ navigation.navigate(path)
     <View style={[styles.touchableWrapper]}>
     
     {item.icon}
-    <Text style={[styles.elementText,{color:theme.foreground}]} >{item.title}</Text>
+    <Text style={[styles.elementText,{color:theme.fontcolor}]}>{item.title}</Text>
     </View>
 
 
@@ -48,6 +48,8 @@ navigation.navigate(path)
   }
 }
 CustomeDrawer.contextType = ThemeContext
+
+
 const styles = StyleSheet.create({
 
     container:{
@@ -69,12 +71,12 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         alignItems: 'center',
         margin:18,
-        borderBottomColor:'rgba(33, 114, 224,0.55)',
+        // borderBottomColor:'rgba(33, 114, 224,0.55)',
         borderBottomWidth:3
     },
     userIdText:{
         fontFamily:'sans-serif',
-        color:'#888',
+        
         fontSize:26,
         fontWeight: '100',
     },

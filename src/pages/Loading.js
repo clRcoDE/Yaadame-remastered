@@ -19,7 +19,7 @@ export default class Loading extends Component {
 
   }
   componentDidMount() {
-    setTimeout(() => this.goto() , 1000 )
+    setTimeout(() => this.goto() , 200 )
     // this.props.navigation.navigate('Lists')
   }
 
