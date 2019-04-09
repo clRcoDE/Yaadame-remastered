@@ -16,11 +16,11 @@
 
   
   
-<img  src="./src/assets/images/demo/Screenshot_1554804114.png" width="320" alt="loading-screen">
-<img  src="./src/assets/images/demo/Screenshot_1554804160.png" width="320">
-<img  src="./src/assets/images/demo/Screenshot_1554804170.png" width="320">
-<img  src="./src/assets/images/demo/Screenshot_1554804405.png" width="320">
-<img  src="./src/assets/images/demo/Screenshot_1554804179.png" width="320">
+<img  src="./src/assets/images/demo/Screenshot_1554804114.png" width="260" alt="loading-screen">
+<img  src="./src/assets/images/demo/Screenshot_1554804160.png" width="260">
+<img  src="./src/assets/images/demo/Screenshot_1554804170.png" width="260">
+<img  src="./src/assets/images/demo/Screenshot_1554804405.png" width="260">
+<img  src="./src/assets/images/demo/Screenshot_1554804179.png" width="260">
 </div>
   
   
