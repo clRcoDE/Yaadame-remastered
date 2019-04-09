@@ -16,7 +16,7 @@ import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import MaterialIcons from 'react-native-vector-icons/MaterialIcons'
 import AntIcon from 'react-native-vector-icons/AntDesign'
-
+import Header from '../components/Header'
 
 
 
@@ -93,15 +93,18 @@ class Lists extends Component {
     let theme = this.context
     return (
       <View style={[styles.container,{backgroundColor:theme.background}]} >
-        <View style={[styles.headerWrapper,{borderBottomColor:theme.foreground}]}>
+      
+      {/* <View style={[styles.headerWrapper,{borderBottomColor:theme.foreground}]}>
           <TouchableOpacity style={styles.menuListButton} onPress={this.drawer.bind(this)}>
             <IonIcons size={35} color={theme.icons} name={'ios-list'} />
           </TouchableOpacity>
           <View style={styles.headerTextWrapper}>
             <Text style={[styles.headerText,{color:theme.fontcolor}]} >Lists</Text>
           </View>
-        </View>
-        <View style={styles.listsWrapper}>
+        </View> */}
+<Header  headerTitle={"Lists"}  headerIconName={'ios-list'}  navigation={this.props.navigation} />
+
+<View style={styles.listsWrapper}>
           <FlatList
           ListEmptyComponent={this.emptyComponent}
             data={this.props.listsReducer.lists}
@@ -155,7 +158,7 @@ class Lists extends Component {
                 underlayColor={'rgba(255,255,255,0.9)'}
                 onPress={this.clearInput.bind(this)}
                 style={styles.clearButton}>
-                <EvilIcon name={'close'} size={18} color={theme.highlight} />
+                <EvilIcon name={'close'} size={24} color={theme.highlight} />
               </TouchableOpacity>}
 
               <View style={styles.addButtonWrapper}>
@@ -293,8 +296,9 @@ addButtonWrapper: {
   },
   
   emptyLists: {
-    height: dim.height*(55/100),
-    borderWidth: 2,
+    height: dim.height-(342),
+   
+    borderWidth:3,
     borderRadius: 15,
     
     justifyContent: 'center',

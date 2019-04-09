@@ -9,14 +9,14 @@ import { ThemeContext } from '../components/ThemeContext'
 
 
 
-import IonIcons from 'react-native-vector-icons/Ionicons'
+// import IonIcons from 'react-native-vector-icons/Ionicons'
 import FeatherIcons from 'react-native-vector-icons/Feather'
 class Settings extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      switchTranslate: new Animated.Value(4),
+      switchTranslate: new Animated.Value(3),
       toggle:false
     }
   }
@@ -36,7 +36,7 @@ class Settings extends Component {
       this.props.changeTheme()
       this.setState(prev=>({toggle:!prev.toggle}))
       Animated.timing(this.state.switchTranslate, {
-        toValue: 4,
+        toValue: 3,
         duration: 300,
         useNativeDriver:true
       }).start()
@@ -47,10 +47,10 @@ class Settings extends Component {
   render() {
 
     let theme = this.context
-    let headerIcon = <IonIcons size={35} color={theme.icons} name={'ios-list'} />
+    // let headerIcon = <IonIcons size={35} color={theme.icons} name={'ios-list'} />
     return (
       <View style={[styles.container, { backgroundColor: theme.background }]} >
-        <Header headerTitle={'Settings'} headerIcon={headerIcon} navigation={this.props.navigation} />
+        <Header headerTitle={'Settings'}  headerIconName={'ios-list'} navigation={this.props.navigation} />
         <View style={styles.body}>
           <View style={styles.togglerBox}>
             <FeatherIcons size={30} color={theme.fontcolor} name={'sun'} />

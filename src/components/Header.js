@@ -1,20 +1,26 @@
 import React, { Component } from 'react'
 import { Text, StyleSheet, View ,TouchableOpacity } from 'react-native'
 import {ThemeContext} from './ThemeContext'
+
+import Ionicon from 'react-native-vector-icons/Ionicons'
 export default class Header extends Component {
 
 
-  drawer=()=>{
+  ButtonAction=()=>{
     const { navigation } = this.props
+    if(this.props.buttonAction === "back"){
+      navigation.goBack()
+    }else{
     navigation.openDrawer()
+    }
   }
   render() {
     let theme = this.context
     return (
       <View style={styles.container} >
         <View style={[styles.headerWrapper,{borderBottomColor:theme.foreground}]}>
-          <TouchableOpacity style={styles.menuListButton} onPress={this.drawer.bind(this)}>
-            {this.props.headerIcon}
+          <TouchableOpacity style={styles.menuListButton} onPress={this.ButtonAction.bind(this)}>
+            <Ionicon size={35} name={this.props.headerIconName} color={theme.icons}/>
           </TouchableOpacity>
           <View style={styles.headerTextWrapper}>
             <Text style={[styles.headerText,{color:this.context.fontcolor}]} >{this.props.headerTitle}</Text>

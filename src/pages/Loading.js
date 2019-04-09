@@ -13,6 +13,7 @@ export default class Loading extends Component {
       // } else {
         navigation.navigate('Introduce')
       // }
+      
     // } catch (error) {
     //   Alert.alert(` Async Storage Error : ${error}  `)
     // }

@@ -18,7 +18,7 @@ class Theme {
 }
 
 
-export const lightTheme = new Theme('#f5f5f5','#2060ff','#333', 'rgba(175,175,175,0.5)' , '#2060ff' ,1)
+export const lightTheme = new Theme('#f5f5f5','#2060ff','#333', 'rgba(125,125,125,0.5)' , '#2060ff' ,1)
 export const darkTheme = new Theme('#333','#f5ff42','#f5f5f5',  'rgba(255,255,255,0.5)'  ,'#f5f5f5'   ,2)
 
 

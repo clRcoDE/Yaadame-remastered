@@ -5,12 +5,13 @@ import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
 import AntIcon from 'react-native-vector-icons/AntDesign'
 
-
+import Header from '../components/Header'
 
 import { connect } from 'react-redux'
 import { addItem, getExistingItems, toggleItem } from '../services/todo//actions'
+import {ThemeContext} from '../components/ThemeContext'
 
-
+import {themes} from '../components/ThemeContext'
 const dim = Dimensions.get('window')
 
 class Items extends Component {
@@ -18,6 +19,7 @@ class Items extends Component {
 
   constructor(props) {
     super(props)
+    
     this.state = {
       isShowButtons: false,
       textInput: null,
@@ -66,14 +68,14 @@ class Items extends Component {
   /***********************************************   change item  activity    *********************************************** */
 
 
-  changeActivity = ({ id , isCompleted }) => {
+  changeActivity = ({ id, isCompleted }) => {
     // console.log(userId , listId , id , isCompleted)
 
-    onSuccess=()=>{
+    onSuccess = () => {
       return true
     }
 
-  this.props.toggleItem(  id , isCompleted , onSuccess )
+    this.props.toggleItem(id, isCompleted, onSuccess)
 
 
 
@@ -90,23 +92,32 @@ class Items extends Component {
 
 
 
-  emptyComponent = () => (<View style={styles.emptyLists}>
-    <Text style={styles.emptyListsText}> Create New Item <AntIcon name={'down'} color={'#aaa'} size={25} /></Text>
+  emptyComponent = () => (<View style={[styles.emptyLists,{borderColor:this.context.highlight}]}>
+    <Text style={styles.emptyListsText}> Create New Item <AntIcon name={'down'} color={this.context.highlight} size={25} /></Text>
   </View>)
 
 
   render() {
+    let theme = this.context
     return (
-      <View style={styles.container} >
-        <View style={styles.headerWrapper}>
+      <View style={[styles.container,{backgroundColor:theme.background}]} >
+
+
+        {/* <View style={styles.headerWrapper}>
+
           <TouchableOpacity style={styles.menuListButton} onPress={this.navigator.bind(this)}>
             <IonIcons size={30} color={'#222'} name={'ios-arrow-back'} />
           </TouchableOpacity>
+
           <View style={styles.headerTextWrapper}>
             <Text style={styles.headerText} >{this.props.navigation.getParam('title', 'null')}</Text>
           </View>
-        </View>
-        <View style={styles.listsWrapper}>
+
+        </View> */}
+        <Header headerTitle={this.props.navigation.getParam('title', 'null')}  headerIconName={'ios-arrow-back'} navigation={this.props.navigation} buttonAction={"back"} />
+
+
+        <View style={[styles.listsWrapper,{backgroundColor:theme.background}]}>
 
 
           <FlatList
@@ -114,16 +125,16 @@ class Items extends Component {
             data={this.props.todo.lists[this.listIndex].items}
             keyExtractor={item => `${item.id} `}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => this.changeActivity(item)} style={styles.listElements}>
+              <TouchableOpacity onPress={() => this.changeActivity(item)} style={[styles.listElements,{borderBottomColor:theme.highlight}]}>
                 <View style={styles.elementWrapper}>
                   <View style={styles.activityWrapper}>
                     {item.isCompleted && <AntIcon name={"checkcircleo"} size={20} color={"#1fe062"} />}
-                    {!item.isCompleted && <EntypoIcon name={"circle"} size={20} color={"#444"} />}
+                    {!item.isCompleted && <EntypoIcon name={"circle"} size={20} color={theme.fontcolor} />}
 
 
                   </View>
                   <View style={styles.detailsWrapper}>
-                    <Text  style={[styles.todoItemText,{textDecorationLine:item.isCompleted?'line-through':'none'}]} >{item.title}</Text>
+                    <Text style={[styles.todoItemText, { color:theme.fontcolor,textDecorationLine: item.isCompleted ? 'line-through' : 'none' }]} >{item.title}</Text>
                   </View>
                   <View style={styles.optionsWrapper}></View>
                 </View>
@@ -135,11 +146,11 @@ class Items extends Component {
 
         </View>
         <View style={styles.footerWrapper}>
-          <View style={styles.inputNewList}>
+          <View style={[styles.inputNewList,{borderTopColor:theme.foreground}]}>
 
             {this.state.isShowButtons &&
               <TouchableOpacity underlayColor={'rgba(150,150,150,0.65)'} onPress={() => { }} style={styles.colorSelector} >
-                <EntypoIcon name={"circle"} size={20} color={"#2172e0"} />
+                <EntypoIcon name={"circle"} size={20} color={theme.foreground} />
               </TouchableOpacity>}
 
 
@@ -149,10 +160,12 @@ class Items extends Component {
               onChangeText={(text) => this.setItemName(text)}
               multiline={true}
               maxLength={36}
-              style={styles.inputStyles}
+              style={[styles.inputStyles,{color:theme.fontcolor}]}
               onBlur={this.hideButtons.bind(this)}
               onFocus={this.showButtons.bind(this)}
-              placeholder={' What you Want To do ? '} >
+              placeholder={' What you Want To do ? '} 
+              placeholderTextColor={theme.highlight}
+              >
             </TextInput>
 
 
@@ -161,16 +174,16 @@ class Items extends Component {
                 underlayColor={'rgba(255,255,255,0.9)'}
                 onPress={this.clearInput.bind(this)}
                 style={styles.clearButton}>
-                <EvilIcon name={'close'} size={18} color='#222' />
+                <EvilIcon name={'close'} size={24} color={theme.highlight} />
               </TouchableOpacity>}
 
             <View style={styles.addButtonWrapper}>
               {this.state.isShowButtons &&
                 <TouchableOpacity
                   underlayColor={'rgba(33, 86, 158,0.7)'}
-                  style={styles.addButton}
+                  style={[styles.addButton,{backgroundColor:theme.foreground}]}
                   onPress={this.addNewItem.bind(this)} >
-                  <Text style={styles.AddButtonStyles}  >Add</Text>
+                  <Text style={[styles.AddButtonStyles,{color:theme.background}]}>Add</Text>
                 </TouchableOpacity>}
             </View>
 
@@ -186,12 +199,15 @@ class Items extends Component {
 }
 
 
+
+Items.contextType = ThemeContext 
+
 const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
 
-    backgroundColor: '#f5f5f5'
+    // backgroundColor: '#f5f5f5'
   },
   headerWrapper: {
     // flex:5,
@@ -210,8 +226,8 @@ const styles = StyleSheet.create({
   },
 
   emptyLists: {
-    height: dim.height * (55 / 100),
-    borderWidth: 2,
+    height: dim.height-(342),
+    borderWidth: 3,
     borderRadius: 15,
     borderColor: 'rgba(200,200,200,0.7)',
     justifyContent: 'center',
@@ -236,7 +252,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     justifyContent: 'center',
     borderBottomWidth: 3,
-    borderBottomColor: 'rgba(220,220,220,0.7)'
+    
 
   },
   elementWrapper: {
@@ -269,8 +285,8 @@ const styles = StyleSheet.create({
     left: 0,
     marginLeft: 20,
     marginTop: 20,
-    width:30,
-    height:30,
+    width: 30,
+    height: 30,
     justifyContent: 'center',
     alignItems: 'center',
     // borderWidth:1
@@ -335,8 +351,8 @@ const styles = StyleSheet.create({
     width: 50,
     // borderWidth:3
   },
-  AddButtonStyles:{
-    color:'#f5f5f5'
+  AddButtonStyles: {
+    color: '#f5f5f5'
   }
 
 })
