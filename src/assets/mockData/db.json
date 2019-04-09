@@ -2,6 +2,12 @@
   "users": [
     {
       "id": "james"
+    },
+    {
+      "id": "fwefw"
+    },
+    {
+      "id": "Martin"
     }
   ],
   "lists": [
@@ -9,6 +15,16 @@
       "userId": "james",
       "title": "james shop list",
       "id": 1
+    },
+    {
+      "userId": "Martin",
+      "title": "shop list ",
+      "id": 2
+    },
+    {
+      "userId": "Martin",
+      "title": "2nd list",
+      "id": 3
     }
   ],
   "items": [
@@ -18,6 +34,41 @@
       "title": "buy milk",
       "isCompleted": false,
       "id": 1
+    },
+    {
+      "userId": "Martin",
+      "listId": "2",
+      "title": "buy milk ",
+      "isCompleted": false,
+      "id": 2
+    },
+    {
+      "userId": "Martin",
+      "listId": "3",
+      "title": "milk",
+      "isCompleted": true,
+      "id": 3
+    },
+    {
+      "userId": "Martin",
+      "listId": "3",
+      "title": "bananas",
+      "isCompleted": true,
+      "id": 4
+    },
+    {
+      "userId": "Martin",
+      "listId": "3",
+      "title": "beef",
+      "isCompleted": true,
+      "id": 5
+    },
+    {
+      "userId": "Martin",
+      "listId": "3",
+      "title": "pop corn",
+      "isCompleted": false,
+      "id": 6
     }
   ]
 }

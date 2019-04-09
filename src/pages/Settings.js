@@ -53,12 +53,12 @@ class Settings extends Component {
         <Header headerTitle={'Settings'} headerIcon={headerIcon} navigation={this.props.navigation} />
         <View style={styles.body}>
           <View style={styles.togglerBox}>
-            <FeatherIcons size={30} color={theme.fontcolor} name={'moon'} />
+            <FeatherIcons size={30} color={theme.fontcolor} name={'sun'} />
             <TouchableOpacity style={[styles.switchBox, { backgroundColor:theme.fontcolor }]} onPress={this.themer.bind(this)} >
               <Animated.View style={[styles.movingCircle, {backgroundColor:theme.background ,transform: ([{ translateX: this.state.switchTranslate }]) }]} ></Animated.View>
 
             </TouchableOpacity>
-            <FeatherIcons size={30} color={theme.fontcolor} name={'sun'} />
+            <FeatherIcons size={30} color={theme.fontcolor} name={'moon'} />
           </View>
 
         </View>
