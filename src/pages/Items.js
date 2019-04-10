@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard, Dimensions , PanResponder } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard, Dimensions, PanResponder, Animated, Easing } from 'react-native'
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -9,39 +9,71 @@ import Header from '../components/Header'
 
 import { connect } from 'react-redux'
 import { addItem, getExistingItems, toggleItem } from '../services/todo//actions'
-import {ThemeContext} from '../components/ThemeContext'
+import { ThemeContext } from '../components/ThemeContext'
 
-import {themes} from '../components/ThemeContext'
+import { themes } from '../components/ThemeContext'
 const dim = Dimensions.get('window')
 const filters = {
-  all:"all",
-  active:"active",
-  done:"done"
+  all: "all",
+  active: "active",
+  done: "done"
 }
 class Items extends Component {
 
 
   constructor(props) {
     super(props)
-    
+
     this.state = {
       isShowButtons: false,
       textInput: null,
-      filter:filters.all
+      filter: filters.all
 
 
     }
+
     this.listId = this.props.navigation.getParam('listId', null)
     // this.listIndex1 = this.props.getListIndex(this.listId)
     this.listIndex = this.props.todo.lists.findIndex(({ id }) => id == this.listId)
 
   }
 
+
+//****************************************  NOTE: Testing PanResponder   *********************************************** */
+
+
+  // translateX = new Animated.Value(0);
+  // translateY = new Animated.Value(0);
+  // _panResponder = PanResponder.create({
+  //   onMoveShouldSetResponderCapture: () => true,
+  //   onMoveShouldSetPanResponderCapture: () => true,
+  //   onPanResponderMove: Animated.event([null, { dx: this.translateX, dy: this.translateY }]),
+  //   onPanResponderRelease: (e, { vx, dx }) => {
+
+  //     if (Math.abs(vx) >= 0.6 || Math.abs(dx) >= 0.6 * dim.width) {
+  //       Animated.timing(this.translateX, {
+  //         toValue: dx > 0 ? dim.width : -dim.width,
+  //         duration: 300,
+  //         useNativeDriver: true
+  //       }).start(this.props.onDismiss);
+  //     } else {
+  //       Animated.spring(this.translateX, {
+  //         toValue: 0,
+  //         bounciness: 1,
+  //         useNativeDriver: true,
+  //       }).start();
+  //     }
+  //   }
+  // });
+
+  
+
   static navigationOptions = ({ navigation }) => {
     return {
       title: navigation.getParam('title', 'null')
     }
   }
+
   /**************************************************  input functions  ****************************************************/
   hideButtons = () => {
     this.setState({ isShowButtons: false })
@@ -74,7 +106,6 @@ class Items extends Component {
 
 
   changeActivity = ({ id, isCompleted }) => {
-    // console.log(userId , listId , id , isCompleted)
 
     onSuccess = () => {
       return true
@@ -95,44 +126,35 @@ class Items extends Component {
     navigation.goBack()
   }
 
-  handlefilters=(newfilter)=>{
-    this.setState({filter:newfilter})
+  handlefilters = (newfilter) => {
+    this.setState({ filter: newfilter })
   }
 
 
-  listEmptyComponent = (props) => (<View style={[styles.emptyLists,{borderColor:this.context.highlight}]}>
+  listEmptyComponent = (props) => (<View style={[styles.emptyLists, { borderColor: this.context.highlight }]}>
     <Text style={styles.emptyListsText}> Create New Item <AntIcon name={'down'} color={this.context.highlight} size={25} /></Text>
   </View>)
 
-listHeaderComponent =  (props) =>{ return this.props.todo.lists[this.listIndex].items.length ? <View style={styles.listHeader} >
-<View style={styles.listfiltersWrapper} >
-<TouchableOpacity  onPress={this.handlefilters.bind(this , filters.all)}  style={[styles.filtersButton,{borderColor:this.state.filter === filters.all ? this.context.foreground : this.context.highlight}]}  ><Text style={[styles.filtersText,{color:this.state.filter === "all" ? this.context.foreground :this.context.fontcolor}]} >All</Text></TouchableOpacity>
-<TouchableOpacity  onPress={this.handlefilters.bind(this , filters.active)}  style={[styles.filtersButton,{borderColor:this.state.filter == filters.active? this.context.foreground : this.context.highlight}]}  ><Text style={[styles.filtersText,{color:this.state.filter === "active" ? this.context.foreground :this.context.fontcolor}]} >Active</Text></TouchableOpacity>
-<TouchableOpacity  onPress={this.handlefilters.bind(this , filters.done)}  style={[styles.filtersButton,{borderColor:this.state.filter == filters.done? this.context.foreground : this.context.highlight}]}  ><Text style={[styles.filtersText,{color:this.state.filter === "done" ? this.context.foreground :this.context.fontcolor}]} >Done</Text></TouchableOpacity>
-</View>
-</View> : null}
+  listHeaderComponent = (props) => {
+    return this.props.todo.lists[this.listIndex].items.length ? <View style={styles.listHeader} >
+      <View style={styles.listfiltersWrapper} >
+        <TouchableOpacity onPress={this.handlefilters.bind(this, filters.all)} style={[styles.filtersButton, { borderColor: this.state.filter === filters.all ? this.context.foreground : this.context.highlight }]}  ><Text style={[styles.filtersText, { color: this.state.filter === "all" ? this.context.foreground : this.context.fontcolor }]} >All</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.handlefilters.bind(this, filters.active)} style={[styles.filtersButton, { borderColor: this.state.filter == filters.active ? this.context.foreground : this.context.highlight }]}  ><Text style={[styles.filtersText, { color: this.state.filter === "active" ? this.context.foreground : this.context.fontcolor }]} >Active</Text></TouchableOpacity>
+        <TouchableOpacity onPress={this.handlefilters.bind(this, filters.done)} style={[styles.filtersButton, { borderColor: this.state.filter == filters.done ? this.context.foreground : this.context.highlight }]}  ><Text style={[styles.filtersText, { color: this.state.filter === "done" ? this.context.foreground : this.context.fontcolor }]} >Done</Text></TouchableOpacity>
+      </View>
+    </View> : null
+  }
 
   render() {
     let theme = this.context
     return (
-      <View style={[styles.container,{backgroundColor:theme.background}]} >
+      <View style={[styles.container, { backgroundColor: theme.background }]} >
 
 
-        {/* <View style={styles.headerWrapper}>
-
-          <TouchableOpacity style={styles.menuListButton} onPress={this.navigator.bind(this)}>
-            <IonIcons size={30} color={'#222'} name={'ios-arrow-back'} />
-          </TouchableOpacity>
-
-          <View style={styles.headerTextWrapper}>
-            <Text style={styles.headerText} >{this.props.navigation.getParam('title', 'null')}</Text>
-          </View>
-
-        </View> */}
-        <Header headerTitle={this.props.navigation.getParam('title', 'null')}  headerIconName={'ios-arrow-back'} navigation={this.props.navigation} buttonAction={"back"} />
+        <Header headerTitle={this.props.navigation.getParam('title', 'null')} headerIconName={'ios-arrow-back'} navigation={this.props.navigation} buttonAction={"back"} />
 
 
-        <View style={[styles.listsWrapper,{backgroundColor:theme.background}]}>
+        <View style={[styles.listsWrapper, { backgroundColor: theme.background }]}>
 
 
           <FlatList
@@ -142,20 +164,28 @@ listHeaderComponent =  (props) =>{ return this.props.todo.lists[this.listIndex].
             extraData={this.state.filter}
             keyExtractor={item => `${item.id} `}
             renderItem={({ item }) => (
-              <TouchableOpacity onPress={() => this.changeActivity(item)} style={[styles.listElements,{borderBottomColor:theme.highlight}]}>
-                <View style={styles.elementWrapper}>
-                  <View style={styles.activityWrapper}>
-                    {item.isCompleted && <AntIcon name={"checkcircleo"} size={20} color={"#1fe062"} />}
-                    {!item.isCompleted && <EntypoIcon name={"circle"} size={20} color={theme.fontcolor} />}
+              <Animated.View
+                
+                 style={[  styles.listElements,  {  borderBottomColor: theme.highlight,
+                  //  transform: [{ translateX: this.translateX }]
+                    }     ]}
+                    // {...this._panResponder.panHandlers}
+                 >
+                <TouchableOpacity style={{ flex: 1 }} onPress={() => this.changeActivity(item)} >
+                  <View style={styles.elementWrapper}>
+                    <View style={styles.activityWrapper}>
+                      {item.isCompleted && <AntIcon name={"checkcircleo"} size={20} color={"#1fe062"} />}
+                      {!item.isCompleted && <EntypoIcon name={"circle"} size={20} color={theme.fontcolor} />}
 
 
+                    </View>
+                    <View style={styles.detailsWrapper}>
+                      <Text style={[styles.todoItemText, { color: theme.fontcolor, textDecorationLine: item.isCompleted ? 'line-through' : 'none' }]} >{item.title}</Text>
+                    </View>
+                    <View style={styles.optionsWrapper}></View>
                   </View>
-                  <View style={styles.detailsWrapper}>
-                    <Text style={[styles.todoItemText, { color:theme.fontcolor,textDecorationLine: item.isCompleted ? 'line-through' : 'none' }]} >{item.title}</Text>
-                  </View>
-                  <View style={styles.optionsWrapper}></View>
-                </View>
-              </TouchableOpacity>    )  }
+                </TouchableOpacity>
+                </Animated.View>)}
           />
 
 
@@ -163,7 +193,7 @@ listHeaderComponent =  (props) =>{ return this.props.todo.lists[this.listIndex].
 
         </View>
         <View style={styles.footerWrapper}>
-          <View style={[styles.inputNewList,{borderTopColor:theme.foreground}]}>
+          <View style={[styles.inputNewList, { borderTopColor: theme.foreground }]}>
 
             {this.state.isShowButtons &&
               <TouchableOpacity underlayColor={'rgba(150,150,150,0.65)'} onPress={() => { }} style={styles.colorSelector} >
@@ -177,12 +207,12 @@ listHeaderComponent =  (props) =>{ return this.props.todo.lists[this.listIndex].
               onChangeText={(text) => this.setItemName(text)}
               multiline={true}
               maxLength={36}
-              style={[styles.inputStyles,{color:theme.fontcolor}]}
+              style={[styles.inputStyles, { color: theme.fontcolor }]}
               onBlur={this.hideButtons.bind(this)}
               onFocus={this.showButtons.bind(this)}
-              placeholder={' What you Want To do ? '} 
+              placeholder={' What you Want To do ? '}
               placeholderTextColor={theme.highlight}
-              >
+            >
             </TextInput>
 
 
@@ -198,9 +228,9 @@ listHeaderComponent =  (props) =>{ return this.props.todo.lists[this.listIndex].
               {this.state.isShowButtons &&
                 <TouchableOpacity
                   underlayColor={'rgba(33, 86, 158,0.7)'}
-                  style={[styles.addButton,{backgroundColor:theme.foreground}]}
+                  style={[styles.addButton, { backgroundColor: theme.foreground }]}
                   onPress={this.addNewItem.bind(this)} >
-                  <Text style={[styles.AddButtonStyles,{color:theme.background}]}>Add</Text>
+                  <Text style={[styles.AddButtonStyles, { color: theme.background }]}>Add</Text>
                 </TouchableOpacity>}
             </View>
 
@@ -217,7 +247,7 @@ listHeaderComponent =  (props) =>{ return this.props.todo.lists[this.listIndex].
 
 
 
-Items.contextType = ThemeContext 
+Items.contextType = ThemeContext
 
 const styles = StyleSheet.create({
   container: {
@@ -243,7 +273,7 @@ const styles = StyleSheet.create({
   },
 
   emptyLists: {
-    height: dim.height-(342),
+    height: dim.height - (342),
     borderWidth: 3,
     borderRadius: 15,
     borderColor: 'rgba(200,200,200,0.7)',
@@ -269,7 +299,7 @@ const styles = StyleSheet.create({
     paddingVertical: 15,
     justifyContent: 'center',
     borderBottomWidth: 3,
-    
+
 
   },
   elementWrapper: {
@@ -371,24 +401,24 @@ const styles = StyleSheet.create({
   AddButtonStyles: {
     color: '#f5f5f5'
   },
-  listHeader:{
-    height:60,
+  listHeader: {
+    height: 60,
     // backgroundColor:'green',
     justifyContent: 'center',
     alignItems: 'center',
   },
-  listfiltersWrapper:{
-    marginHorizontal:50,
+  listfiltersWrapper: {
+    marginHorizontal: 50,
     // backgroundColor:"purple",
     justifyContent: 'center',
     alignItems: 'center',
     flexDirection: 'row',
-  },filtersButton:{
+  }, filtersButton: {
     paddingHorizontal: 10,
-    paddingVertical:2,
-    borderRadius:6,
-    borderWidth:3,
-    marginHorizontal:6
+    paddingVertical: 2,
+    borderRadius: 6,
+    borderWidth: 3,
+    marginHorizontal: 6
   }
 
 })

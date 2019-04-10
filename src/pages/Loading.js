@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, ActivityIndicator, AsyncStorage, Alert , Animated } from 'react-native'
+import { Text, StyleSheet, View, ActivityIndicator, AsyncStorage, Alert , Animated , StatusBar} from 'react-native'
 
 export default class Loading extends Component {
 
@@ -31,13 +31,13 @@ constructor(props){
   startLogo(){
     Animated.timing(this.state.fader,{
       toValue:0,
-      timing:400,
+      timing:300,
       useNativeDriver:true,
       delay:400
     }).start()
   }
   componentDidMount() {
-    setTimeout(() => this.goto() , 800 )
+    setTimeout(() => this.goto() , 700 )
     this.startLogo()
     // this.props.navigation.navigate('Lists')
   }
@@ -45,6 +45,7 @@ constructor(props){
   render() {
     return (
       <View style={styles.container}>
+      <StatusBar backgroundColor="#2060ff" barStyle="light-content" />
         <View style={styles.wrapper} >
 
           <View style={styles.introTextWrapper}>

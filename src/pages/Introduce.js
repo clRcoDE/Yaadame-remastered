@@ -11,7 +11,8 @@ import {
   TextInput,
   KeyboardAvoidingView,
   SafeAreaView,
-  Activity
+  Activity,
+  StatusBar
 } from 'react-native'
 
 import { introduce } from '../assets/mockData/introduceData'
@@ -71,13 +72,13 @@ if(!this.state.textInput){
   startIntroducer(){
     Animated.timing(this.state.fader,{
       toValue:1,
-      timing:400,
-      delay:200,
+      timing:50,
+      delay:300,
       useNativeDriver:true
     }).start()
   }
 
-  componentDidMount(){
+  componentWillMount(){
     this.startIntroducer()
   }
 
@@ -91,6 +92,7 @@ if(!this.state.textInput){
 
     return (
       <KeyboardAvoidingView style={styles.container} enabled   >
+      <StatusBar backgroundColor="#2060ff" barStyle="light-content" />
         <Animated.View style={[styles.introduceListWrapper,{opacity:this.state.fader}]}>
           <FlatList
             data={introduce}
