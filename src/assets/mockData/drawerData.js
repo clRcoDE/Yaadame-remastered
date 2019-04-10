@@ -17,7 +17,7 @@ export default drawerData = [
     {
         icon: <ThemeContext.Consumer>{(theme)=>(<AntIcons name={'setting'} size={25}  color={theme.fontcolor} />)}</ThemeContext.Consumer>,
         title: 'Setting',
-        path: 'Settings',
+        path: 'Setting',
         id:'2'
 
     },

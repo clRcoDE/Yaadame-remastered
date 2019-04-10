@@ -4,85 +4,16 @@
       "id": "james"
     },
     {
-      "id": "fwefw"
+      "id": "trthryjryjryj"
     },
     {
-      "id": "Martin"
+      "id": "Dan"
     },
     {
-      "id": "wefwe"
+      "id": "edger"
     },
     {
-      "id": "34t34t3"
-    },
-    {
-      "id": "ereg"
-    },
-    {
-      "id": "wefwefw"
-    },
-    {
-      "id": "regerge"
-    },
-    {
-      "id": "rthtfe33"
-    },
-    {
-      "id": "wefwewf"
-    },
-    {
-      "id": "efwwfwgfeg"
-    },
-    {
-      "id": "wefwf"
-    },
-    {
-      "id": "wefwef"
-    },
-    {
-      "id": "tjtjtyujt"
-    },
-    {
-      "id": "ergerge"
-    },
-    {
-      "id": "wefwefwgfre"
-    },
-    {
-      "id": "sdvsv"
-    },
-    {
-      "id": "ergethr"
-    },
-    {
-      "id": "ergegerge"
-    },
-    {
-      "id": "ergergrth"
-    },
-    {
-      "id": "egehgthr"
-    },
-    {
-      "id": "rthrthrth"
-    },
-    {
-      "id": "trhytrtj"
-    },
-    {
-      "id": "ethrhr"
-    },
-    {
-      "id": "etherg"
-    },
-    {
-      "id": "rthretfhetrfe"
-    },
-    {
-      "id": "ergherghthe"
-    },
-    {
-      "id": "rhjtjrt"
+      "id": "Lora"
     }
   ],
   "lists": [
@@ -92,109 +23,29 @@
       "id": 1
     },
     {
-      "userId": "Martin",
-      "title": "shop list ",
+      "userId": "trthryjryjryj",
+      "title": "erthtetetjh",
       "id": 2
     },
     {
-      "userId": "Martin",
-      "title": "2nd list",
+      "userId": "Dan",
+      "title": "1st List",
       "id": 3
     },
     {
-      "userId": "wefwe",
-      "title": "wefwefw",
+      "userId": "Dan",
+      "title": "2ndList",
       "id": 4
     },
     {
-      "userId": "34t34t3",
-      "title": "trethrt",
+      "userId": "Dan",
+      "title": "shop List",
       "id": 5
     },
     {
-      "userId": "ereg",
-      "title": "ergerger",
+      "userId": "Dan",
+      "title": "Shop List",
       "id": 6
-    },
-    {
-      "userId": "rthtfe33",
-      "title": "gheertrth",
-      "id": 7
-    },
-    {
-      "userId": "wefwewf",
-      "title": "wrgerge",
-      "id": 8
-    },
-    {
-      "userId": "ergerge",
-      "title": "wefwefwgfwrg",
-      "id": 9
-    },
-    {
-      "userId": "ergerge",
-      "title": "ergergte",
-      "id": 10
-    },
-    {
-      "userId": "wefwefwgfre",
-      "title": "gergeetherthr",
-      "id": 11
-    },
-    {
-      "userId": "sdvsv",
-      "title": "bebebe",
-      "id": 12
-    },
-    {
-      "userId": "ergethr",
-      "title": "rthrthrth",
-      "id": 13
-    },
-    {
-      "userId": "ergethr",
-      "title": "rhtrth",
-      "id": 14
-    },
-    {
-      "userId": "ergegerge",
-      "title": "ergrftergege",
-      "id": 15
-    },
-    {
-      "userId": "ergergrth",
-      "title": "tyjtyjtyj",
-      "id": 16
-    },
-    {
-      "userId": "ergergrth",
-      "title": "tjyjtyj",
-      "id": 17
-    },
-    {
-      "userId": "ergergrth",
-      "title": "tyjtyj",
-      "id": 18
-    },
-    {
-      "userId": "egehgthr",
-      "title": "tjtyjtktukt",
-      "id": 19
-    },
-    {
-      "userId": "etherg",
-      "title": "ehrgvergve",
-      "id": 20
-    },
-    {
-      "userId": "ergherghthe",
-      "title": "hrthrtergverg",
-      "id": 21
-    },
-    {
-      "userId": "rhjtjrt",
-      "title": "ttyktyjthnjt",
-      "id": 22
     }
   ],
   "items": [
@@ -206,151 +57,46 @@
       "id": 1
     },
     {
-      "userId": "Martin",
+      "userId": "trthryjryjryj",
       "listId": "2",
-      "title": "buy milk ",
+      "title": "ehjrtjryjryjr",
       "isCompleted": false,
       "id": 2
     },
     {
-      "userId": "Martin",
-      "listId": "3",
-      "title": "milk",
-      "isCompleted": true,
+      "userId": "trthryjryjryj",
+      "listId": "2",
+      "title": "yjkgyrhnryhr",
+      "isCompleted": false,
       "id": 3
     },
     {
-      "userId": "Martin",
-      "listId": "3",
-      "title": "bananas",
+      "userId": "Dan",
+      "listId": "6",
+      "title": "Milk",
       "isCompleted": true,
       "id": 4
     },
     {
-      "userId": "Martin",
-      "listId": "3",
-      "title": "beef",
+      "userId": "Dan",
+      "listId": "6",
+      "title": "Pop Corn",
       "isCompleted": true,
       "id": 5
     },
     {
-      "userId": "Martin",
-      "listId": "3",
-      "title": "pop corn",
-      "isCompleted": false,
+      "userId": "Dan",
+      "listId": "6",
+      "title": "breads",
+      "isCompleted": true,
       "id": 6
     },
     {
-      "userId": "rthtfe33",
-      "listId": "7",
-      "title": "egeretheh",
-      "isCompleted": false,
+      "userId": "Dan",
+      "listId": "6",
+      "title": "salmon",
+      "isCompleted": true,
       "id": 7
-    },
-    {
-      "userId": "wefwewf",
-      "listId": "8",
-      "title": "ergerge",
-      "isCompleted": false,
-      "id": 8
-    },
-    {
-      "userId": "wefwefwgfre",
-      "listId": "11",
-      "title": "ergrewgerge",
-      "isCompleted": true,
-      "id": 9
-    },
-    {
-      "userId": "wefwefwgfre",
-      "listId": "11",
-      "title": "egwwe",
-      "isCompleted": true,
-      "id": 10
-    },
-    {
-      "userId": "ergethr",
-      "listId": "13",
-      "title": "thythyrtyhrthb",
-      "isCompleted": true,
-      "id": 11
-    },
-    {
-      "userId": "ergegerge",
-      "listId": "15",
-      "title": "tghetgrerger",
-      "isCompleted": true,
-      "id": 12
-    },
-    {
-      "userId": "ergegerge",
-      "listId": "15",
-      "title": "ergergeg",
-      "isCompleted": true,
-      "id": 13
-    },
-    {
-      "userId": "ergegerge",
-      "listId": "15",
-      "title": "eghtrghegr",
-      "isCompleted": false,
-      "id": 14
-    },
-    {
-      "userId": "ergergrth",
-      "listId": "16",
-      "title": "yktyrtgyrrtgbrgbr",
-      "isCompleted": false,
-      "id": 15
-    },
-    {
-      "userId": "ergergrth",
-      "listId": "16",
-      "title": "ttukthjytht",
-      "isCompleted": false,
-      "id": 16
-    },
-    {
-      "userId": "ergergrth",
-      "listId": "18",
-      "title": "segregegegve",
-      "isCompleted": false,
-      "id": 17
-    },
-    {
-      "userId": "etherg",
-      "listId": "20",
-      "title": "ergereverfgvegf",
-      "isCompleted": false,
-      "id": 18
-    },
-    {
-      "userId": "ergherghthe",
-      "listId": "21",
-      "title": "rjrthgrethbrtgh",
-      "isCompleted": false,
-      "id": 19
-    },
-    {
-      "userId": "ergherghthe",
-      "listId": "21",
-      "title": "ethrthr",
-      "isCompleted": true,
-      "id": 20
-    },
-    {
-      "userId": "rhjtjrt",
-      "listId": "22",
-      "title": "yukyiyulul",
-      "isCompleted": false,
-      "id": 21
-    },
-    {
-      "userId": "rhjtjrt",
-      "listId": "22",
-      "title": "yluuk,u",
-      "isCompleted": true,
-      "id": 22
     }
   ]
 }

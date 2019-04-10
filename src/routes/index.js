@@ -7,7 +7,7 @@ const dim = Dimensions.get('window')
 import About from '../pages/About'
 import Loading from '../pages/Loading'
 import Lists from '../pages/Lists'
-import Settings from '../pages/Settings'
+import Setting from '../pages/Settings'
 import Items from '../pages/Items'
 import Introduce from  '../pages/Introduce'
 import  CustomDrawer from '../components/CustomeDrawer'
@@ -31,7 +31,7 @@ const ListsStack = createStackNavigator(
 const HomeDrawerStack = createDrawerNavigator(
     {
         About:About,
-        Settings:Settings,
+        Setting:Setting,
         Lists:ListsStack
     },{
         

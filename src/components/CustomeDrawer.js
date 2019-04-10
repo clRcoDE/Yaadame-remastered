@@ -66,11 +66,11 @@ const styles = StyleSheet.create({
         flex:1
     },
     profileWrapper:{
-        height:125,
+        height:200,
         // backgroundColor:'green',
         justifyContent: 'center',
         alignItems: 'center',
-        margin:18,
+        // margin:18,
         // borderBottomColor:'rgba(33, 114, 224,0.55)',
         borderBottomWidth:3
     },

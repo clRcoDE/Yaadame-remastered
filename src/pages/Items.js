@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard, Dimensions } from 'react-native'
+import { Text, StyleSheet, View, TouchableOpacity, FlatList, TextInput, Keyboard, Dimensions , PanResponder } from 'react-native'
 import IonIcons from 'react-native-vector-icons/Ionicons'
 import EvilIcon from 'react-native-vector-icons/EvilIcons'
 import EntypoIcon from 'react-native-vector-icons/Entypo'
@@ -13,7 +13,11 @@ import {ThemeContext} from '../components/ThemeContext'
 
 import {themes} from '../components/ThemeContext'
 const dim = Dimensions.get('window')
-
+const filters = {
+  all:"all",
+  active:"active",
+  done:"done"
+}
 class Items extends Component {
 
 
@@ -23,6 +27,7 @@ class Items extends Component {
     this.state = {
       isShowButtons: false,
       textInput: null,
+      filter:filters.all
 
 
     }
@@ -90,12 +95,22 @@ class Items extends Component {
     navigation.goBack()
   }
 
+  handlefilters=(newfilter)=>{
+    this.setState({filter:newfilter})
+  }
 
 
-  emptyComponent = () => (<View style={[styles.emptyLists,{borderColor:this.context.highlight}]}>
+  listEmptyComponent = (props) => (<View style={[styles.emptyLists,{borderColor:this.context.highlight}]}>
     <Text style={styles.emptyListsText}> Create New Item <AntIcon name={'down'} color={this.context.highlight} size={25} /></Text>
   </View>)
 
+listHeaderComponent =  (props) =>{ return this.props.todo.lists[this.listIndex].items.length ? <View style={styles.listHeader} >
+<View style={styles.listfiltersWrapper} >
+<TouchableOpacity  onPress={this.handlefilters.bind(this , filters.all)}  style={[styles.filtersButton,{borderColor:this.state.filter === filters.all ? this.context.foreground : this.context.highlight}]}  ><Text style={[styles.filtersText,{color:this.state.filter === "all" ? this.context.foreground :this.context.fontcolor}]} >All</Text></TouchableOpacity>
+<TouchableOpacity  onPress={this.handlefilters.bind(this , filters.active)}  style={[styles.filtersButton,{borderColor:this.state.filter == filters.active? this.context.foreground : this.context.highlight}]}  ><Text style={[styles.filtersText,{color:this.state.filter === "active" ? this.context.foreground :this.context.fontcolor}]} >Active</Text></TouchableOpacity>
+<TouchableOpacity  onPress={this.handlefilters.bind(this , filters.done)}  style={[styles.filtersButton,{borderColor:this.state.filter == filters.done? this.context.foreground : this.context.highlight}]}  ><Text style={[styles.filtersText,{color:this.state.filter === "done" ? this.context.foreground :this.context.fontcolor}]} >Done</Text></TouchableOpacity>
+</View>
+</View> : null}
 
   render() {
     let theme = this.context
@@ -121,8 +136,10 @@ class Items extends Component {
 
 
           <FlatList
-            ListEmptyComponent={this.emptyComponent}
+            ListEmptyComponent={this.listEmptyComponent}
+            ListHeaderComponent={this.listHeaderComponent}
             data={this.props.todo.lists[this.listIndex].items}
+            extraData={this.state.filter}
             keyExtractor={item => `${item.id} `}
             renderItem={({ item }) => (
               <TouchableOpacity onPress={() => this.changeActivity(item)} style={[styles.listElements,{borderBottomColor:theme.highlight}]}>
@@ -138,7 +155,7 @@ class Items extends Component {
                   </View>
                   <View style={styles.optionsWrapper}></View>
                 </View>
-              </TouchableOpacity>)}
+              </TouchableOpacity>    )  }
           />
 
 
@@ -353,6 +370,25 @@ const styles = StyleSheet.create({
   },
   AddButtonStyles: {
     color: '#f5f5f5'
+  },
+  listHeader:{
+    height:60,
+    // backgroundColor:'green',
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  listfiltersWrapper:{
+    marginHorizontal:50,
+    // backgroundColor:"purple",
+    justifyContent: 'center',
+    alignItems: 'center',
+    flexDirection: 'row',
+  },filtersButton:{
+    paddingHorizontal: 10,
+    paddingVertical:2,
+    borderRadius:6,
+    borderWidth:3,
+    marginHorizontal:6
   }
 
 })

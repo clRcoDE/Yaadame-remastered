@@ -1,4 +1,4 @@
-import React, { Component, PureComponent } from 'react'
+import React, { Component, PureComponent  } from 'react'
 import {
   Text,
   StyleSheet,
@@ -28,7 +28,8 @@ class Introduce extends PureComponent {
       textInput: null,
       scrollX: new Animated.Value(0),
       IntScrollX: 0,
-      inputError:null
+      inputError:null,
+      fader: new Animated.Value(0)
 
 
     }
@@ -67,7 +68,18 @@ if(!this.state.textInput){
     }
 
   }
-  
+  startIntroducer(){
+    Animated.timing(this.state.fader,{
+      toValue:1,
+      timing:400,
+      delay:200,
+      useNativeDriver:true
+    }).start()
+  }
+
+  componentDidMount(){
+    this.startIntroducer()
+  }
 
 
 
@@ -79,7 +91,7 @@ if(!this.state.textInput){
 
     return (
       <KeyboardAvoidingView style={styles.container} enabled   >
-        <View style={styles.introduceListWrapper}>
+        <Animated.View style={[styles.introduceListWrapper,{opacity:this.state.fader}]}>
           <FlatList
             data={introduce}
             keyboardShouldPersistTaps={'handled'}
@@ -119,7 +131,7 @@ if(!this.state.textInput){
               </View>)
             }
           />
-        </View>
+        </Animated.View>
 
       </KeyboardAvoidingView>
     )
@@ -131,7 +143,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     justifyContent: 'center',
-    backgroundColor: '#4286f4'
+    backgroundColor: '#2060ff'
   },
   introduceListWrapper: {
     flex: 1,
